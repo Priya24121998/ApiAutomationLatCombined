@@ -97,6 +97,8 @@ public class OrderServiceB2C {
 		order.setEnv(OrderPlacementControllerB2C.environmentSelected);
 		order.setOrderId(placeOrderOutline.OrderID);
 		order.setUserId(userId != null ? userId : placeOrderOutline.userID);
+		order.setPromoCodeApplied(OrderPlacementControllerB2C.promoCodeAppliedValue);
+		order.setPromoCode(OrderPlacementControllerB2C.promoCodeValue);
 		order.setPaymentType(OrderPlacementControllerB2C.paymentTypeSelected.toString());
 		order.setDeliveryMode(OrderPlacementControllerB2C.deliveryModeSelected);
 		order.setDate(OrderWorkFlow.getCurrentTimestamp());
@@ -130,7 +132,7 @@ public class OrderServiceB2C {
 			phyIsbn = Arrays.asList("9781305094765@@NA");
 			break;
 		case "B2CUS":
-			phyIsbn = Arrays.asList("9781133365419@@CU");
+			phyIsbn = Arrays.asList("9781305961135@@CU");
 			break;
 		default:
 			phyIsbn = new ArrayList<>();
@@ -184,6 +186,7 @@ public class OrderServiceB2C {
 		order.setDate(OrderWorkFlow.getCurrentTimestamp());
 		return order;
 	}
+	
 
 
 //	

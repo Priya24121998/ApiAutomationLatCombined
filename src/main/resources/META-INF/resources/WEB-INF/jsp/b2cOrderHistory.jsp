@@ -101,6 +101,8 @@ pagination {
 				<th>Order ID</th>
 				<th>User ID</th>
 				<th>Delivery Mode</th>
+				<th>Promo Code Applied or not</th>
+				<th>Promo Code Value if applied</th>
 				<th>Payment Type</th>
 				<th>Date</th>
 			</tr>
@@ -114,6 +116,8 @@ pagination {
 					<td>${order.orderId}</td>
 					<td>${order.userId}</td>
 					<td>${order.deliveryMode}</td>
+					<td>${order.promoCodeApplied}</td>
+					<td>${order.promoCode}</td>
 					<td>${order.paymentType}</td>
 					<td>${order.date}</td>
 				</tr>

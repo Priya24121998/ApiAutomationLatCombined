@@ -539,6 +539,18 @@ public class OrderWorkflowB2C extends OrderWorkFlow {
 		logMessage("Rental Buyout Added to Cart For CartId : " + cartId);
 
 	}
+
+	public static String applyCoupon(String baseSiteId, String userId, String cartId, String coupon, int statusCode) {
+		String endpoint = "/" + baseSiteId + "/users/" + userId + "/carts/" + cartId + "/vouchers";
+		logMessage("**Add coupon to cart API: " + endpoint);
+		String token = setAuthorizationHeader();
+		RestAssured.baseURI = PropFileHandler.readProperty("base_URI");
+		response = RestAssured.given().headers("Authorization", token).contentType(ContentType.JSON).when()
+				.queryParam("voucherId", coupon).post(endpoint).then().assertThat().statusCode(statusCode).extract()
+				.asString();
+		
+		return response ;
+	}
 	
 	
 }

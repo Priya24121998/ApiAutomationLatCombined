@@ -23,6 +23,8 @@ public class OrderOut {
 
 	private String deliveryMode;
 	private String paymentType;
+	private String promoCodeApplied;
+	private String promoCode;
 	private String date;
 
 	public OrderOut() {
@@ -90,6 +92,22 @@ public class OrderOut {
 		this.deliveryMode = deliveryMode;
 	}
 
+	public String getPromoCodeApplied() {
+		return promoCodeApplied;
+	}
+
+	public void setPromoCodeApplied(String promoCodeApplied) {
+		this.promoCodeApplied = promoCodeApplied;
+	}
+
+	public String getPromoCode() {
+		return promoCode;
+	}
+
+	public void setPromoCode(String promoCode) {
+		this.promoCode = promoCode;
+	}
+
 	public String getPaymentType() {
 		return paymentType;
 	}
@@ -109,7 +127,8 @@ public class OrderOut {
 	@Override
 	public String toString() {
 		return "OrderOut [id=" + id + ", env=" + env + ", store=" + store + ", orderId=" + orderId + ", userId="
-				+ userId + ",  deliveryMode=" + deliveryMode + ", paymentType=" + paymentType + ", date=" + date + "]";
+				+ userId + ", deliveryMode=" + deliveryMode + ", paymentType=" + paymentType + ", promoCodeApplied="
+				+ promoCodeApplied + ", promoCode=" + promoCode + ", date=" + date + "]";
 	}
 
 }

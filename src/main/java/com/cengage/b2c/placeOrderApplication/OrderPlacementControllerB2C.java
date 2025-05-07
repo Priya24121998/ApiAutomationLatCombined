@@ -57,12 +57,16 @@ public class OrderPlacementControllerB2C {
 	public static PaymentType paymentTypeSelected;
 	public static String storeTypeSelected;
 	public static String deliveryModeSelected;
+	public static String isbnTypeSelected;
 	public static String isbnSelected;
 	public static String userId;
 	public PropFileHandler prop;
 	public OrderOut orderout;
 	public OrderSuscriptionOut ordersub;
 	public static String orderTypeSelected;
+	public static String promoCodeAppliedValue;
+	public static String promoCodeValue;
+	public static org.json.JSONObject addProdReqPayload = null;
 
 	private OrderServiceB2C orderservice;
 	public OrderSubscriptionRespository ordersubRespository;
@@ -99,6 +103,10 @@ public class OrderPlacementControllerB2C {
 			@RequestParam(value = "digitalISBN", required = false) String digitalISBN,
 			@RequestParam(value = "bundleISBN", required = false) String bundleISBN,
 			@RequestParam(value = "otherISBN", required = false) String otherISBN,
+			@RequestParam(value = "combined", required = false) String combined,
+			@RequestParam(value = "multipleProd", required = false) String multipleProd,
+			@RequestParam(value = "promoCodeApplied", required = false) String promoCodeApplied,
+			@RequestParam(value = "promoCode", required = false) String promoCode,
 			@RequestParam(value = "paymentType", required = false) PaymentType paymentType,
 			@RequestParam(value = "creditCardType", required = false) CreditCardTypeB2C creditCardType, ModelMap model,
 			@Valid @ModelAttribute("placeOrderB2C") Order orderobj, BindingResult result) {
@@ -108,6 +116,7 @@ public class OrderPlacementControllerB2C {
 			return "placeOrderB2C";
 		}
 
+		promoCodeValue = null;
 		storeTypeSelected = store;
 		orderobj.setEnv(env);
 		environmentSelected = env;
@@ -117,6 +126,7 @@ public class OrderPlacementControllerB2C {
 		deliveryModeSelected = deliveryMode;
 
 		orderobj.setIsbnType(isbnType);
+		isbnTypeSelected = isbnType.toString();
 		if (isbnType.equals(IsbnType.physical)) {
 			orderobj.setPhysicalISBN(physicalISBN);
 			isbnSelected = physicalISBN;
@@ -129,9 +139,19 @@ public class OrderPlacementControllerB2C {
 		} else if (isbnType.equals(IsbnType.other)) {
 			orderobj.setOtherISBN(otherISBN);
 			isbnSelected = otherISBN;
+		}else if (isbnType.equals(IsbnType.combined)) {
+			addProdReqPayload = Payload.multipleIsbnAndQuantityGetAndCreatePayloadB2C(multipleProd);
 		}
 
 		orderservice.setBaseStore(store);
+		orderobj.setPromoCodeApplied(promoCodeApplied);
+		promoCodeAppliedValue =promoCodeApplied;
+		if(promoCodeApplied.equalsIgnoreCase("yes"))
+		{
+			orderobj.setPromoCode(promoCode);
+			promoCodeValue = promoCode;
+			
+		}
 		orderservice.setPaymentType(paymentType);
 		if (paymentType.equals(PaymentType.cc)) {
 			orderservice.setCreditCardType(creditCardType);
@@ -205,14 +225,14 @@ public class OrderPlacementControllerB2C {
 		response.setContentType("text/csv");
 		response.setHeader("Content-Disposition", "attachment; filename=\"order_details.csv\"");
 		PrintWriter writer = response.getWriter();
-		writer.println("ID,Environment,Store,Order ID,User ID,Delivery Mode, Payment Type,Date");
+		writer.println("ID,Environment,Store,Order ID,User ID,Delivery Mode, Promo Code Applied, Promo code, Payment Type,Date");
 
 		List<OrderOut> orderOutHistory = orderoutrepository.findAll();
 
 		for (OrderOut orderOutData : orderOutHistory) {
 			writer.println(orderOutData.getId() + "," + orderOutData.getEnv() + "," + orderOutData.getStore() + ","
 					+ orderOutData.getOrderId() + "," + orderOutData.getUserId() + "," + orderOutData.getDeliveryMode()
-					+ "," + orderOutData.getPaymentType() + "," + orderOutData.getDate());
+					+ "," + orderOutData.getPromoCodeApplied()+  "," + orderOutData.getPromoCode()+"," + orderOutData.getPaymentType() + "," + orderOutData.getDate());
 		}
 
 		writer.flush();
@@ -314,6 +334,8 @@ public class OrderPlacementControllerB2C {
 		OrderWorkflowB2C.OrderID = null;
 		OrderWorkflowB2C.subscriptionId = null;
 		placeOrderOutline.rentalID = null;
+		
+
 
 	}
 
@@ -354,7 +376,20 @@ public class OrderPlacementControllerB2C {
 			CreditCardTypeB2C creditCardType) {
 		try {
 			placeOrderOutline.createCart(userId, baseStore, store, 201);
+			if(isbnTypeSelected.equalsIgnoreCase("combined"))
+			{
+				try {
+					placeOrderOutline.addProdToCartFastPacedB2C(baseStore, store, 200, addProdReqPayload);
+				} catch (Exception e) {
+					System.out.println("Exception :" + e);
+					Payload.clearIsbnsStoredInCurrentExecution();
+
+				}
+			}
+			else
+			{
 			placeOrderOutline.addB2CProductToCart(baseStore);
+			}
 			if (baseStore.equals("cengage-b2c-au")) {
 				placeOrderOutline.addBillingAddressToCart(baseStore, "AU_address");
 				placeOrderOutline.addDeliveryAddressToCart(baseStore, "AU_address");
@@ -381,6 +416,11 @@ public class OrderPlacementControllerB2C {
 				placeOrderOutline.addDeliveryAddressToCart(baseStore, "Taxable_Address");
 				placeOrderOutline.getDeliveryModes(baseStore);
 				placeOrderOutline.putB2CDeliveryModes(baseStore, "standard-us");
+			}
+			
+			if((promoCodeAppliedValue.equalsIgnoreCase("yes"))&& (promoCodeValue!=null))
+			{
+				placeOrderOutline.applyVouchers(promoCodeValue,baseStore);
 			}
 
 			if (paymentTypeSelected.equals(paymentType.cc)) {

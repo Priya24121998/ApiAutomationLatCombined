@@ -40,6 +40,9 @@ public class Order {
 	private String digitalISBN;
 	private String bundleISBN;
 	private String otherISBN;
+	private String multipleProd;
+	private String promoCodeApplied;
+	private String promoCode;
 	public Order()
 	{
 		
@@ -124,12 +127,43 @@ public class Order {
 	}
 
 
+	public String getMultipleProd() {
+		return multipleProd;
+	}
+
+
+	public void setMultipleProd(String multipleProd) {
+		this.multipleProd = multipleProd;
+	}
+
+
+	public String getPromoCodeApplied() {
+		return promoCodeApplied;
+	}
+
+
+	public void setPromoCodeApplied(String promoCodeApplied) {
+		this.promoCodeApplied = promoCodeApplied;
+	}
+
+
+	public String getPromoCode() {
+		return promoCode;
+	}
+
+
+	public void setPromoCode(String promoCode) {
+		this.promoCode = promoCode;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", env=" + env + ", userid=" + userid + ", paymentType=" + paymentType
 				+ ", deliveryMode=" + deliveryMode + ", isbnType=" + isbnType + ", creditCardType=" + creditCardType
 				+ ", physicalISBN=" + physicalISBN + ", digitalISBN=" + digitalISBN + ", bundleISBN=" + bundleISBN
-				+ ", otherISBN=" + otherISBN + "]";
+				+ ", otherISBN=" + otherISBN + ", multipleProd=" + multipleProd + ", promoCodeApplied="
+				+ promoCodeApplied + ", promoCode=" + promoCode + "]";
 	}
 
 	

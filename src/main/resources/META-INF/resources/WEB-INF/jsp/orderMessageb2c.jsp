@@ -113,6 +113,7 @@ function downloadPDF() {
                     <p><strong>Order ID:</strong> <span id="orderId">${orderMessageb2cAtt.orderId}</span></p>
                     <p><strong>User ID:</strong> <span id="userId">${orderMessageb2cAtt.userId}</span></p>
                     <p><strong>Delivery Mode:</strong> <span id="deliveryMode">${orderMessageb2cAtt.deliveryMode}</span></p>
+                    <p><strong>Promo code applied or not:</strong> <span id="promoCodeApplied">${orderMessageb2cAtt.promoCodeApplied}</span></p>
                     <p><strong>Payment Type:</strong> <span id="paymentType">${orderMessageb2cAtt.paymentType}</span></p>
                     <p><strong>Date:</strong> <span id="date">${orderMessageb2cAtt.date}</span></p>
                 </div>

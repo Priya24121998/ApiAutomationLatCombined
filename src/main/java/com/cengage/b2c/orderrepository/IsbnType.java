@@ -20,6 +20,7 @@ public enum IsbnType {
 	physical,
 	digital,
 	bundle,
-	other;
+	other,
+	combined
 }
 

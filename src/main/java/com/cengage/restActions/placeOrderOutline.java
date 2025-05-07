@@ -120,6 +120,17 @@ public class placeOrderOutline extends OrderWorkFlow {
 		else
 			response = OrderWorkFlow.addB2BProductToCart(baseSiteId, userID, cartId, payload, status);
 	}
+	
+	public static void addProdToCartFastPacedB2C(String baseSiteId, String store, int statusCode,
+			org.json.JSONObject addProdReqPayload) {
+		int status = 200;
+		String payload = addProdReqPayload.toString();
+		System.out.println(payload);
+		if (userID.equalsIgnoreCase("anonymous"))
+			response = OrderWorkflowB2C.addProductToCartUsingPayload(baseSiteId, userID, authenticatedCartGuid, payload, status);
+		else
+			response = OrderWorkflowB2C.addProductToCartUsingPayload(baseSiteId, userID, cartId, payload, status);
+	}
 
 	public static void addB2CProductToCart(String basestore) {
 		int status = 200;
@@ -450,7 +461,13 @@ public class placeOrderOutline extends OrderWorkFlow {
 	}
 	
 	public static void rentalBuyout() {
-		OrderWorkflowB2C.rentalBuyout(PropFileHandler.readProperty("baseSiteId"), userGUID, cartId, rentalID);
+		OrderWorkflowB2C.rentalBuyout(PropFileHandler.readProperty("baseSiteId"), userID, cartId, rentalID);
+	}
+	
+	public static void applyVouchers(String coupon,String baseStore) {
+		int status = 200;
+		logMessage("**[INFO] Applying [" + coupon + "] to cart");
+		response = OrderWorkflowB2C.applyCoupon(baseStore, userID, cartId, coupon, status);
 	}
 	
 	

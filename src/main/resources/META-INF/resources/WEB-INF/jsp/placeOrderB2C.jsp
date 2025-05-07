@@ -65,6 +65,11 @@ input[type="submit"]:hover {
 .hidden {
 	display: none;
 }
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box; 
+}
+
 </style>
 <body>
 	<div class="form-container">
@@ -105,6 +110,7 @@ input[type="submit"]:hover {
 						<form:option value="digital" label="Digital" />
 						<form:option value="bundle" label="Bundle" />
 						<form:option value="other" label="Other" />
+						<form:option value="combined" label="Combined" />
 					</form:select>
 					<form:errors path="isbnType" cssClass="error" />
 				</div>
@@ -156,6 +162,33 @@ input[type="submit"]:hover {
 					<form:errors path="otherISBN" cssClass="error" />
 				</div>
 			</fieldset>
+			<fieldset class="mb-3 hidden" id="combinedISBNOptions">
+				<div class="form-group">
+					<form:label path="multipleProd">Multiple Products:</form:label>
+					<form:textarea path="multipleProd" name="multipleProd"
+						placeholder="Enter multiple product details"></form:textarea>
+					<form:errors path="multipleProd" cssClass="error" />
+				</div>
+			</fieldset>
+			<fieldset class="mb-3">
+				<div class="form-group">
+					<form:label path="promoCodeApplied">Promo Code Applied:</form:label>
+					<form:select path="promoCodeApplied" name="promoCodeApplied"
+						id="promoCodeApplied" onchange="togglePromoCodeField()">
+						<form:option value="no" label="No" selected="selected" />
+						<form:option value="yes" label="Yes" />
+					</form:select>
+					<form:errors path="promoCodeApplied" cssClass="error" />
+				</div>
+			</fieldset>
+			<fieldset class="mb-3 hidden" id="promoCodeFieldset">
+				<div class="form-group">
+					<form:label path="promoCode">Promo Code:</form:label>
+					<form:input type="text" path="promoCode" name="promoCode"
+						placeholder="Enter promo code" />
+					<form:errors path="promoCode" cssClass="error" />
+				</div>
+			</fieldset>
 			<fieldset class="mb-3">
 				<div class="form-group">
 					<form:label path="paymentType">Payment Type:</form:label>
@@ -191,6 +224,7 @@ input[type="submit"]:hover {
 		document.addEventListener('DOMContentLoaded', function() {
 			toggleCreditCardOptions();
 			toggleISBNOptions();
+			togglePromoCodeField();
 		});
 		function showSuccessMessage() {
 			document.getElementById('successMessage').style.display = 'block';
@@ -206,6 +240,29 @@ input[type="submit"]:hover {
 				creditCardOptions.classList.add('hidden');
 			}
 		}
+		function validatePromoCode() {
+			var promoCodeApplied = document.getElementById('promoCodeApplied').value;
+			if (promoCodeApplied === 'yes') {
+				var promoCode = document.getElementById('promoCode').value;
+				if (promoCode.length < 5) {
+					alert('Promo code must be at least 5 characters long.');
+					return false;
+				}
+			}
+			return true;
+		}
+
+		function togglePromoCodeField() {
+			var promoCodeApplied = document.getElementById('promoCodeApplied').value;
+			var promoCodeFieldset = document
+					.getElementById('promoCodeFieldset');
+			if (promoCodeApplied === 'yes') {
+				promoCodeFieldset.classList.remove('hidden');
+			} else {
+				promoCodeFieldset.classList.add('hidden');
+			}
+		}
+
 		function toggleISBNOptions() {
 			var isbnType = document.getElementById('isbnType').value;
 			var physicalISBNOptions = document
@@ -215,11 +272,13 @@ input[type="submit"]:hover {
 			var bundleISBNOptions = document
 					.getElementById('bundleISBNOptions');
 			var otherISBNOptions = document.getElementById('otherISBNOptions');
+			var combinedISBNOptions = document.getElementById('combinedISBNOptions'); 
 
 			physicalISBNOptions.classList.add('hidden');
 			digitalISBNOptions.classList.add('hidden');
 			bundleISBNOptions.classList.add('hidden');
 			otherISBNOptions.classList.add('hidden');
+			combinedISBNOptions.classList.add('hidden');
 
 			if (isbnType === 'physical') {
 				physicalISBNOptions.classList.remove('hidden');
@@ -229,6 +288,8 @@ input[type="submit"]:hover {
 				bundleISBNOptions.classList.remove('hidden');
 			} else if (isbnType === 'other') {
 				otherISBNOptions.classList.remove('hidden');
+			}else if (isbnType === 'combined') {
+				combinedISBNOptions.classList.remove('hidden');
 			}
 		}
 		document.getElementById('orderForm').onsubmit = function(event) {
@@ -237,7 +298,7 @@ input[type="submit"]:hover {
 				event.preventDefault();
 				return false;
 			}
-			showSuccessMessage();
+			return validatePromoCode() && showSuccessMessage();
 		};
 	</script>
 	<%@ include file="common/footer.jspf"%>
