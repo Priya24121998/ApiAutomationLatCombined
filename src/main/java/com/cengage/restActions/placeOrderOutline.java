@@ -18,14 +18,13 @@ import io.restassured.path.json.JsonPath;
 public class placeOrderOutline extends OrderWorkFlow {
 
 	private OrderWorkFlow placeObj;
-	
 
 	public placeOrderOutline(OrderWorkFlow placeObj) {
 		this.placeObj = placeObj;
 	}
 
 	private static String authorizationValue;
-	public static String userID,rentalID,oldRentalEndDate;
+	public static String userID, rentalID, oldRentalEndDate;
 	public static String storeType;
 	static Map<String, String> usercreationPayloadHashMap = new HashMap<String, String>();
 	static int i = 0;
@@ -120,14 +119,15 @@ public class placeOrderOutline extends OrderWorkFlow {
 		else
 			response = OrderWorkFlow.addB2BProductToCart(baseSiteId, userID, cartId, payload, status);
 	}
-	
+
 	public static void addProdToCartFastPacedB2C(String baseSiteId, String store, int statusCode,
 			org.json.JSONObject addProdReqPayload) {
 		int status = 200;
 		String payload = addProdReqPayload.toString();
 		System.out.println(payload);
 		if (userID.equalsIgnoreCase("anonymous"))
-			response = OrderWorkflowB2C.addProductToCartUsingPayload(baseSiteId, userID, authenticatedCartGuid, payload, status);
+			response = OrderWorkflowB2C.addProductToCartUsingPayload(baseSiteId, userID, authenticatedCartGuid, payload,
+					status);
 		else
 			response = OrderWorkflowB2C.addProductToCartUsingPayload(baseSiteId, userID, cartId, payload, status);
 	}
@@ -157,10 +157,9 @@ public class placeOrderOutline extends OrderWorkFlow {
 
 	public static void getDeliveryModes(String baseStore) {
 		int statusGet = 200;
-		if(userID==null)
-		{
-			userID= OrderPlacementControllerB2C.userId;
-			
+		if (userID == null) {
+			userID = OrderPlacementControllerB2C.userId;
+
 		}
 		response = OrderWorkflowB2C.getDeliveryModes(baseStore, userID, cartId, statusGet);
 	}
@@ -254,7 +253,7 @@ public class placeOrderOutline extends OrderWorkFlow {
 	}
 
 	public static void launchFullAuthNewPaypalURLForB2C(String baseStore, int status) {
-	
+
 		String applicationPath = OrderWorkflowB2C.getApplicationPathPaypal(baseStore, userID, cartId, status);
 		if (status != 400) {
 			logMessage(applicationPath);
@@ -287,38 +286,34 @@ public class placeOrderOutline extends OrderWorkFlow {
 		}
 	}
 
-	public static void placeOrderUsingPaypalNewFullAuth(String basestore,int status) {
+	public static void placeOrderUsingPaypalNewFullAuth(String basestore, int status) {
 		if (basestore.equalsIgnoreCase("cengage-b2c-au")) {
 			String payerId = PropFileHandler.readProperty("payerIdB2CAU");
-			OrderWorkflowB2C.placeOrderUsingNewPayPal(basestore, userID, cartId,
-					status, payerId);
+			OrderWorkflowB2C.placeOrderUsingNewPayPal(basestore, userID, cartId, status, payerId);
 
 		} else if (basestore.equalsIgnoreCase("cengage-b2c-us")) {
 			String payerId = PropFileHandler.readProperty("payerIdB2CUS");
-			OrderWorkflowB2C.placeOrderUsingNewPayPal(basestore, userID, cartId,
-					status, payerId);
+			OrderWorkflowB2C.placeOrderUsingNewPayPal(basestore, userID, cartId, status, payerId);
 		} else if (basestore.equalsIgnoreCase("cengage-b2c-ca")) {
 			String payerId = PropFileHandler.readProperty("payerIdB2CCA");
-			OrderWorkflowB2C.placeOrderUsingNewPayPal(basestore, userID, cartId,
-					status, payerId);
+			OrderWorkflowB2C.placeOrderUsingNewPayPal(basestore, userID, cartId, status, payerId);
 		} else if (basestore.equalsIgnoreCase("cengage-b2c-emea")) {
 			String payerId = PropFileHandler.readProperty("payerIdB2CEMEA");
-			OrderWorkflowB2C.placeOrderUsingNewPayPal(basestore, userID, cartId,
-					status, payerId);
+			OrderWorkflowB2C.placeOrderUsingNewPayPal(basestore, userID, cartId, status, payerId);
 		}
 		logMessage("Order placed with ID: " + OrderID);
 
 	}
-	
+
 	public static void createSubscription(String user, String type) {
 
-		userGUID = user; 
+		userGUID = user;
 		if (type.contains("Pv"))
 			OrderWorkflowB2C.createSubscriptionApi(PropFileHandler.readSKU_PlanID(type), userGUID, 400, null, 0);
 		else
 			OrderWorkflowB2C.createSubscriptionApi(PropFileHandler.readSKU_PlanID(type), userGUID, 201, null, 0);
 	}
-	
+
 	public static void verifyAPIResponseValueForAPariticularField(String apiGet, String field, String expectedValue) {
 		String value;
 		if (apiGet.equalsIgnoreCase("get state"))
@@ -328,8 +323,7 @@ public class placeOrderOutline extends OrderWorkFlow {
 
 		value = BaseClass.extractValuefromResponse(response, field);
 
-		if (field.contains("Date"))
-		{
+		if (field.contains("Date")) {
 			value = BaseClass.extractDateFromWholeString(value);
 		}
 
@@ -339,24 +333,23 @@ public class placeOrderOutline extends OrderWorkFlow {
 	public static void addProductToCart(String product) {
 
 		String payload = PropFileHandler.readPayloads(product);
-		OrderWorkflowB2C.addProductToCartUsingPayload(PropFileHandler.readProperty("baseSiteId"), userGUID, cartId, payload, 200);
+		OrderWorkflowB2C.addProductToCartUsingPayload(PropFileHandler.readProperty("baseSiteId"), userGUID, cartId,
+				payload, 200);
 	}
 
 	public static void addProductToCart(String userId, String product) {
-		String payload=null;
-		if(product.equalsIgnoreCase("4"))
-		{
-		 payload = PropFileHandler.readPayloads("4Mon_Payload");
-		}
-		else if(product.equalsIgnoreCase("12"))
-		{
-		 payload = PropFileHandler.readPayloads("12Mon_Payload");
+		String payload = null;
+		if (product.equalsIgnoreCase("4")) {
+			payload = PropFileHandler.readPayloads("4Mon_Payload");
+		} else if (product.equalsIgnoreCase("12")) {
+			payload = PropFileHandler.readPayloads("12Mon_Payload");
 		}
 		userGUID = userId;
 		logMessage(userGUID);
-		OrderWorkflowB2C.addProductToCartUsingPayload(PropFileHandler.readProperty("baseSiteId"), userGUID, cartId, payload, 200);
+		OrderWorkflowB2C.addProductToCartUsingPayload(PropFileHandler.readProperty("baseSiteId"), userGUID, cartId,
+				payload, 200);
 	}
-	
+
 	public static void logTestData(String userType) {
 		if (userType.equalsIgnoreCase("Cart")) {
 			OrderWorkflowB2C.logTestDataCart();
@@ -375,19 +368,17 @@ public class placeOrderOutline extends OrderWorkFlow {
 			}
 		}
 	}
-	
+
 	public static void createNewUserAndActivateUser(String type) throws IOException {
-		
-		//creation and activation
+
+		// creation and activation
 		Map<String, String> userInfo = new HashMap<>();
 		userInfo = OrderWorkflowB2C.emailAndPassOfReturninguserForOktaBySoapApi(type);
 		userID = userInfo.get("email");
 		userGUID = userInfo.get("guid");
 		PropFileHandler.writeProperty(type, userID);
 	}
-	
 
-	
 	public static void createB2CUserUsingSAPApi(String store) {
 		String payload = OrderWorkflowB2C.customerPayload("automation", "FirstName", "LastName", store);
 		response = OrderWorkflowB2C.registerACustomer(PropFileHandler.readProperty(store + "_BaseStore"), payload, 201);
@@ -401,18 +392,18 @@ public class placeOrderOutline extends OrderWorkFlow {
 		logMessage("User created Successfully: " + userID);
 		logMessage("User guid created Successfully: " + userID);
 	}
-	
+
 	public static void checkRentalPlanID(String expectedID) {
 		String actualID;
 		String response = OrderWorkflowB2C.returnListOfRentalThatContainingRentalInformation(userGUID, 200);
 		logMessage(response);
 		rentalID = extractValueFromJOSNPath("rentals[0].rentalId", response);
 		actualID = extractValueFromJOSNPath("rentals[0].rentalPlanId", response);
-		
+
 		compareResponseValue(actualID, expectedID);
-		
+
 	}
-	
+
 	public static void verifyRentalStatus(String expected) {
 		String rentalStatus;
 		String response = OrderWorkflowB2C.returnListOfRentalThatContainingRentalInformation(userGUID, 200);
@@ -424,7 +415,7 @@ public class placeOrderOutline extends OrderWorkFlow {
 		compareResponseValue(expected, rentalStatus);
 
 	}
-	
+
 	public static void getRentalEndDate() {
 
 		String response = OrderWorkflowB2C.returnListOfRentalThatContainingRentalInformation(userGUID, 200);
@@ -432,18 +423,17 @@ public class placeOrderOutline extends OrderWorkFlow {
 		logMessage("Rental EndDate: " + oldRentalEndDate);
 		PropFileHandler.writeProperty("rentalEndDate", oldRentalEndDate);
 	}
-	
+
 	public static void userShouldBeAbleToShipRental() {
 		String response = OrderWorkflowB2C.returnListOfRentalThatContainingRentalInformation(userGUID, 200);
 		rentalID = extractValueFromJOSNPath("rentals[0].rentalId", response);
 		OrderWorkflowB2C.updateStausOfRentalOrder(PropFileHandler.readProperty("baseSiteId"), OrderID, rentalID, 200);
 	}
 
-	
 	public static void extendRentalForDays(String days) {
 		OrderWorkflowB2C.extendRental(PropFileHandler.readProperty("baseSiteId"), userGUID, cartId, rentalID, days);
 	}
-	
+
 	public static void checkIsRentalExtended(int days) {
 
 		String response = OrderWorkflowB2C.returnListOfRentalThatContainingRentalInformation(userGUID, 200);
@@ -452,29 +442,32 @@ public class placeOrderOutline extends OrderWorkFlow {
 		String expectedEndDate = addNumOfDaysToDate(oldRentalEndDate, days);
 		compareResponseValue(endDate, expectedEndDate);
 	}
-	
+
 	public static void returnOfTextbookAndModifyRentalStateAccordingly(String state) {
 		String rentalID;
 		String response = OrderWorkflowB2C.returnListOfRentalThatContainingRentalInformation(userGUID, 200);
 		rentalID = extractValueFromJOSNPath("rentals[0].rentalId", response);
 		OrderWorkflowB2C.returnOfTextbookAndModifyRentalStateAccordingly(rentalID, state, 200);
 	}
-	
+
 	public static void rentalBuyout() {
 		OrderWorkflowB2C.rentalBuyout(PropFileHandler.readProperty("baseSiteId"), userID, cartId, rentalID);
 	}
-	
-	public static void applyVouchers(String coupon,String baseStore) {
+
+	public static void applyVouchers(String coupon, String baseStore) {
 		int status = 200;
 		logMessage("**[INFO] Applying [" + coupon + "] to cart");
 		response = OrderWorkflowB2C.applyCoupon(baseStore, userID, cartId, coupon, status);
 	}
-	
-	
-	
-	
 
-
-	
+	public static void setDropShip(String basestore, String address) {
+		int status = 201;
+		String payload = PropFileHandler.readPayloads(address);
+		try {
+			OrderWorkFlow.createDropShipAddressForCart(basestore, userID, cartId, payload, status);
+		} catch (NullPointerException e) {
+			OrderWorkFlow.createDropShipAddressForCart(basestore, userID, cartId, payload, status);
+		}
+	}
 
 }

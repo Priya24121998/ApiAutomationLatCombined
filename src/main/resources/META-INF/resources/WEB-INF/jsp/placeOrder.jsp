@@ -221,8 +221,17 @@ input[type="submit"]:hover {
 					<form:errors path="creditCardType" cssClass="error" />
 				</div>
 			</fieldset>
-
-			<!-- Other form fields -->
+			<fieldset class="mb-3">
+				<div class="form-group" id="dropshipRadioOptions">
+					<form:label path="dropshipRadio">Dropdown Radio Option:</form:label>
+					<label> <form:radiobutton path="dropshipRadio"
+							name="dropshipRadio" value="yes"/>Yes
+					</label> <label> <form:radiobutton path="dropshipRadio"
+							name="dropshipRadio" value="no" checked="true"/>  No
+					</label>
+					<form:errors path="dropshipRadio" cssClass="error" />
+				</div>
+			</fieldset>
 			<input type="submit" value="Place Order" />
 		</form:form>
 	</div>

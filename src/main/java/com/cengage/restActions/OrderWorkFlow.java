@@ -187,6 +187,23 @@ public class OrderWorkFlow extends BaseClass{
 		
 		return response;
 	}
+	
+	public static void createDropShipAddressForCart(String baseSiteId, String userId, String cartId, String payload,
+			int status) {
+
+		String endPoint = "/" + baseSiteId + "/users/" + userId + "/carts/" + cartId + "/addresses/drop-ship";
+		logMessage("Create Drop-Ship Address To Cart API: " + endPoint);
+		RestAssured.baseURI = PropFileHandler.readProperty("base_URI");
+		String token = setAuthorizationHeader();
+		response = RestAssured.given().headers("Authorization", token).contentType(ContentType.JSON).when()
+				.queryParam("fields", "DEFAULT").body(payload).post(endPoint).then().assertThat().statusCode(status)
+				.extract().asString();
+
+		if (status != 400)
+			logMessage("Drop-Ship Address created to cartId: " + cartId);
+
+		responseMap = JsonPath.from(response);
+	}
 
 	
 	

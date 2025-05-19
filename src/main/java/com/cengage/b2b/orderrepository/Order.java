@@ -65,6 +65,8 @@ public class Order {
 	private String addIsbnWithQuantity;
 
 	private String otherAccount;
+	
+	private String dropshipRadio;
 
 	public Order() {
 	}
@@ -207,6 +209,14 @@ public class Order {
 		this.otherAccount = otherAccount;
 	}
 
+	public String getDropshipRadio() {
+		return dropshipRadio;
+	}
+
+	public void setDropshipRadio(String dropshipRadio) {
+		this.dropshipRadio = dropshipRadio;
+	}
+
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", env=" + env + ", userid=" + userid + ", account=" + account + ", deliveryMode="
@@ -214,7 +224,7 @@ public class Order {
 				+ ", isbnPhysical=" + isbnPhysical + ", isbnDigital=" + isbnDigital + ", isbnBundle=" + isbnBundle
 				+ ", promoCodeApplied=" + promoCodeApplied + ", promoCode=" + promoCode + ", creditCardType="
 				+ creditCardType + ", addIsbnWithQuantity=" + addIsbnWithQuantity + ", otherAccount=" + otherAccount
-				+ "]";
+				+ ", dropshipRadio=" + dropshipRadio + "]";
 	}
 
 }

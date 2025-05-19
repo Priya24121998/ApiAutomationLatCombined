@@ -76,6 +76,7 @@ public class OrderPlacementController {
 	public static String promoCodeAppliedOut = null;
 	public static String promoCodeGet = null;
 	public static String environmentSelected = null;
+	public static String dropshipRadioSelected =null;
 	public static String storeToBeSelected = null;
 	OrderOut order;
 	UserCreationOut userout;
@@ -108,6 +109,7 @@ public class OrderPlacementController {
 		model.addAttribute("staticAccounts", staticAccounts);
 		model.addAttribute("placeOrderAtt", orderService.createOrder(store, userId, paymentType));
 		logger.info("Static accounts available :" + staticAccounts);
+		
 		logger.info("Store: " + store);
 		return "placeOrder";
 	}
@@ -128,7 +130,9 @@ public class OrderPlacementController {
 			@RequestParam(value = "isbnBundle", required = false) String isbnBundle,
 			@RequestParam(value = "addIsbnWithQuantity", required = false) String addIsbnWithQuantity,
 			@RequestParam(value = "promoCodeApplied", required = false) String promoCodeApplied,
-			@RequestParam(value = "promoCode", required = false) String promoCode, ModelMap model,
+			@RequestParam(value = "promoCode", required = false) String promoCode,
+			@RequestParam(value = "dropshipRadio", required = false) String dropshipRadio,
+			ModelMap model,
 			@Valid @ModelAttribute("placeOrderAtt") Order orderobj, BindingResult result) {
 
 		// input validation
@@ -141,6 +145,7 @@ public class OrderPlacementController {
 		// updating the values according to chosen value in ui
 		orderobj.setEnv(env);
 		environmentSelected = env.toString();
+		storeToBeSelected = store;
 		orderobj.setAccount(account);
 		if (account.equalsIgnoreCase("other")) {
 			orderobj.setOtherAccount(otherAccount);
@@ -183,6 +188,8 @@ public class OrderPlacementController {
 		} else if (orderTypeSelected.equals(OrderType.fastPacedOrder)) {
 			addProdReqPayload = Payload.multipleIsbnAndQuantityGetAndCreatePayload(addIsbnWithQuantity);
 		}
+		orderobj.setDropshipRadio(dropshipRadio);
+		dropshipRadioSelected = dropshipRadio;
 
 		orderRepository.save(orderobj);
 		logger.info("--------------------Place Order Values section after update-------------------");
@@ -195,6 +202,7 @@ public class OrderPlacementController {
 		logger.info(String.format("Promo code if applied: %s", promoCode));
 		logger.info(String.format("Payment type selected: %s", paymentType));
 		logger.info(String.format("Delivery mode selected: %s", deliveryMode));
+		logger.info(String.format("Drop ship applied: %s", dropshipRadio));
 		orderService.setBaseStore(store);
 
 		// place order execution
@@ -439,6 +447,10 @@ public class OrderPlacementController {
 				System.out.println("No promo code is applied");
 			}
 			placeOrderOutline.setdeliveryMode(baseStore, deliveryMode);
+			if(dropshipRadioSelected.equalsIgnoreCase("yes"))
+			{
+				placeOrderOutline.setDropShip(baseStore,"dropShipAddress");
+			}
 			if (paymentTypeSelected.equals(paymentType.poOnly)) {
 				paymentTypeMode = "PO";
 				placeOrderOutline.updatePODetails(baseStore, "PO1234567");
