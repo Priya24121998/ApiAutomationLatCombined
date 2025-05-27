@@ -1,3 +1,28 @@
+/**
+ * This class handles the REST actions related to the Order Workflow for B2C (Business-to-Consumer) operations.
+ * It provides methods to manage and process orders in the system.
+ * 
+ * <p>Key functionalities of this class include:
+ * <ul>
+ *   <li>Processing customer orders</li>
+ *   <li>Managing order workflows</li>
+ *   <li>Integrating with other services for order-related operations</li>
+ * </ul>
+ * 
+ * <p>Usage:
+ * <pre>
+ * {@code
+ * OrderWorkflowB2C orderWorkflow = new OrderWorkflowB2C();
+ * // Call methods to process orders
+ * }
+ * </pre>
+ * 
+ * <p>Note: Ensure that all required dependencies are properly configured before using this class.
+ * 
+ * @author Your Name
+ * @version 1.0
+ * @since 2023
+ */
 package com.cengage.restActions;
 
 import java.io.FileInputStream;

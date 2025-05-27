@@ -1,3 +1,21 @@
+/**
+ * The {@code UIActions} class is part of the `com.cengage.restActions` package.
+ * This class is designed to handle user interface-related actions within the 
+ * application. It provides methods and utilities to interact with and manage 
+ * UI elements effectively.
+ *
+ * <p>Usage of this class ensures a clean separation of UI-related logic, 
+ * making the codebase more modular and easier to maintain. Developers can 
+ * extend or modify the functionality of this class to suit specific UI 
+ * interaction requirements.
+ *
+ * <p><strong>Note:</strong> Ensure that all methods in this class are 
+ * thoroughly tested to maintain the integrity of UI interactions.
+ *
+ * @author Priyadharshini M
+ * @version 1.0
+ * @since 2025
+ */
 package com.cengage.restActions;
 
 import org.openqa.selenium.By;

@@ -1,3 +1,75 @@
+/**
+ * The OrderPlacementController class is a Spring MVC controller that handles
+ * various operations related to order placement and user creation in a B2B
+ * environment. It provides endpoints for placing orders, managing order history,
+ * exporting order details, creating users, and managing user creation history.
+ * 
+ * <p>
+ * This controller interacts with services and repositories to perform the
+ * following tasks:
+ * </p>
+ * <ul>
+ *   <li>Display home and order placement pages</li>
+ *   <li>Process order placement requests with various configurations</li>
+ *   <li>Export order details to CSV files</li>
+ *   <li>Create B2B users and manage user creation history</li>
+ *   <li>Export user details to CSV files</li>
+ * </ul>
+ * 
+ * <p>
+ * The controller uses Spring's dependency injection to manage its dependencies
+ * and provides validation for user inputs. It also logs important information
+ * and errors for debugging and monitoring purposes.
+ * </p>
+ * 
+ * <p>
+ * Key features include:
+ * </p>
+ * <ul>
+ *   <li>Dynamic order creation with support for multiple configurations such as
+ *       payment type, delivery mode, promo codes, and ISBN types.</li>
+ *   <li>Support for creating single or multiple users in different environments
+ *       and stores.</li>
+ *   <li>Export functionality for both order and user details in CSV format.</li>
+ *   <li>Pagination support for user creation history.</li>
+ * </ul>
+ * 
+ * <p>
+ * Note: This controller relies on various services, repositories, and utility
+ * classes for its operations, such as {@code OrderService}, {@code UserService},
+ * {@code OrderRepository}, and {@code placeOrderOutline}.
+ * </p>
+ * 
+ * <p>
+ * Exceptions such as {@code OrderPlacementException} and
+ * {@code UserCreationException} are thrown in case of validation errors or
+ * unexpected issues during order placement or user creation.
+ * </p>
+ * 
+ * <p>
+ * Example usage:
+ * </p>
+ * <pre>
+ * // Access the home page
+ * GET /home
+ * 
+ * // Place an order
+ * POST /placeOrderHome
+ * 
+ * // Export order details
+ * GET /exportOrderDetails
+ * 
+ * // Create a B2B user
+ * POST /create-b2b-user
+ * 
+ * // View user creation history
+ * GET /userCreationHistory
+ * </pre>
+ * 
+ * @author Priyadharshini M
+ * @version 1.0
+ * @since 2025
+ */
 package com.cengage.b2b.placeOrderApplication;
 
 import java.io.IOException;

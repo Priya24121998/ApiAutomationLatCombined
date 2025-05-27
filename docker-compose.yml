@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  spring-boot-app:
+    build: .
+    container_name: spring-boot-app
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: b2b
+    command: >
+      java -Dspring-boot.run.arguments=--server.port=8081
+           -Dspring-boot.run.main-class=com.cengage.b2b.placeOrderApplication.PlaceOrderWebApplication
+           -jar app.jar

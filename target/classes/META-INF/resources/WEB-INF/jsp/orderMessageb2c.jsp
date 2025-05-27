@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="common/navigationb2b.jspf"%>
+<%@ include file="common/navigation.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,13 +89,12 @@ function downloadPDF() {
 
     doc.text("Order Confirmation", 10, 10);
     doc.text("Environment: " + document.getElementById("environment").innerText, 10, 20);
-    doc.text("Store: " + document.getElementById("store").innerText, 10, 20);
-    doc.text("Order ID: " + document.getElementById("orderId").innerText, 10, 20);
-    doc.text("User ID: " + document.getElementById("userId").innerText, 10, 30);
-    doc.text("Account: " + document.getElementById("account").innerText, 10, 40);
-    doc.text("Delivery Mode: " + document.getElementById("deliveryMode").innerText, 10, 50);
-    doc.text("Payment Type: " + document.getElementById("paymentType").innerText, 10, 60);
-    doc.text("Date: " + document.getElementById("date").innerText, 10, 70);
+    doc.text("Store: " + document.getElementById("store").innerText, 10, 30);
+    doc.text("Order ID: " + document.getElementById("orderId").innerText, 10, 40);
+    doc.text("User ID: " + document.getElementById("userId").innerText, 10, 50);
+    doc.text("Delivery Mode: " + document.getElementById("deliveryMode").innerText, 10, 60);
+    doc.text("Payment Type: " + document.getElementById("paymentType").innerText, 10, 70);
+    doc.text("Date: " + document.getElementById("date").innerText, 10, 80);
 
     doc.save("order_confirmation.pdf");
 }
@@ -109,15 +108,14 @@ function downloadPDF() {
                 <div class="alert alert-success" role="alert">${successMessage}</div>
                 <p style="color: green;">Thank you for placing your order. Here are your order details:</p>
                 <div class="details">
-                    <p><strong>Environment:</strong> <span id="store">${orderMessageAtt.env}</span></p>
-                    <p><strong>Store:</strong> <span id="store">${orderMessageAtt.store}</span></p>
-                    <p><strong>Order ID:</strong> <span id="orderId">${orderMessageAtt.orderId}</span></p>
-                    <p><strong>User ID:</strong> <span id="userId">${orderMessageAtt.userId}</span></p>
-                    <p><strong>Account:</strong> <span id="account">${orderMessageAtt.account}</span></p>
-                    <p><strong>Delivery Mode:</strong> <span id="deliveryMode">${orderMessageAtt.deliveryMode}</span></p>
-                    <p><strong>Promo Code Applied:</strong> <span id="promoCode">${orderMessageAtt.promoCode}</span></p>
-                    <p><strong>Payment Type:</strong> <span id="paymentType">${orderMessageAtt.paymentType}</span></p>
-                    <p><strong>Date:</strong> <span id="date">${orderMessageAtt.date}</span></p>
+                    <p><strong>Environment:</strong> <span id="environment">${orderMessageb2cAtt.env}</span></p>
+                    <p><strong>Store:</strong> <span id="store">${orderMessageb2cAtt.store}</span></p>
+                    <p><strong>Order ID:</strong> <span id="orderId">${orderMessageb2cAtt.orderId}</span></p>
+                    <p><strong>User ID:</strong> <span id="userId">${orderMessageb2cAtt.userId}</span></p>
+                    <p><strong>Delivery Mode:</strong> <span id="deliveryMode">${orderMessageb2cAtt.deliveryMode}</span></p>
+                    <p><strong>Promo code applied or not:</strong> <span id="promoCodeApplied">${orderMessageb2cAtt.promoCodeApplied}</span></p>
+                    <p><strong>Payment Type:</strong> <span id="paymentType">${orderMessageb2cAtt.paymentType}</span></p>
+                    <p><strong>Date:</strong> <span id="date">${orderMessageb2cAtt.date}</span></p>
                 </div>
                 <button class="download-button" onclick="downloadPDF()">Download Report</button>
             </c:when>
@@ -127,7 +125,7 @@ function downloadPDF() {
                 <p>There was an issue placing your order. Please try again later.</p>
             </c:otherwise>
         </c:choose>
-        <p style="margin-top: 20px;"><a href="placeOrderHome?store=${param.store}">Previous Page</a></p>
+        <p style="margin-top: 20px;"><a href="placeOrderB2CHome?store=${param.store}">Previous Page</a></p>
     </div>
 </body>
 </html>

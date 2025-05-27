@@ -1,3 +1,57 @@
+
+/**
+ * The OrderPlacementControllerB2C class is a Spring MVC controller that handles
+ * various operations related to placing orders and managing subscriptions in a 
+ * B2C (Business-to-Consumer) environment. It provides endpoints for order placement, 
+ * subscription creation, order history retrieval, and exporting order details.
+ * 
+ * <p>This controller interacts with services and repositories to perform operations 
+ * such as saving orders, executing workflows, and managing subscription-related data.
+ * It also handles user input validation and provides feedback to the user through 
+ * model attributes.
+ * 
+ * <p>Key functionalities include:
+ * <ul>
+ *   <li>Displaying the home page and order placement page</li>
+ *   <li>Handling order placement requests with various parameters</li>
+ *   <li>Exporting order and subscription details to CSV files</li>
+ *   <li>Managing subscription workflows, including rental extensions and buyouts</li>
+ *   <li>Retrieving order and subscription history</li>
+ * </ul>
+ * 
+ * <p>Dependencies:
+ * <ul>
+ *   <li>OrderServiceB2C: Service layer for order-related operations</li>
+ *   <li>OrderRepository: Repository for managing order data</li>
+ *   <li>OrderOutRepository: Repository for managing order output data</li>
+ *   <li>OrderSubscriptionRepository: Repository for managing subscription data</li>
+ * </ul>
+ * 
+ * <p>Note: This controller uses static variables to store selected values during 
+ * the order placement process. Care should be taken when using these variables 
+ * in a multi-threaded environment.
+ * 
+ * <p>Endpoints:
+ * <ul>
+ *   <li>/homePage: Displays the home page</li>
+ *   <li>/placeOrderB2CHome (GET): Displays the order placement page</li>
+ *   <li>/placeOrderB2CHome (POST): Handles order placement actions</li>
+ *   <li>/b2cOrderHistory: Displays the order history</li>
+ *   <li>/b2cExportOrderDetails: Exports order details to a CSV file</li>
+ *   <li>/subscriptionCreation (GET): Displays the subscription creation page</li>
+ *   <li>/subscriptionCreation (POST): Handles subscription creation actions</li>
+ *   <li>/b2cSubOrderHistory: Displays the subscription order history</li>
+ *   <li>/b2cSubExportOrderDetails: Exports subscription order details to a CSV file</li>
+ * </ul>
+ * 
+ * <p>Exceptions:
+ * <ul>
+ *   <li>OrderPlacementException: Thrown when order placement fails due to an exception</li>
+ * </ul>
+ * 
+ * <p>Author: Priyadharshini M
+ * <p>Version: 1.0
+ */
 package com.cengage.b2c.placeOrderApplication;
 
 import java.io.IOException;
@@ -32,6 +86,7 @@ import com.cengage.b2c.orderrepository.OrderSuscriptionOut;
 import com.cengage.b2c.orderrepository.PaymentType;
 import com.cengage.b2c.orderrepository.rentalType;
 import com.cengage.b2c.orderrepository.userType;
+import com.cengage.b2c.orderrepository.userTypeb2c;
 import com.cengage.common.Payload;
 import com.cengage.common.PropFileHandler;
 import com.cengage.restActions.BaseClass;
@@ -67,6 +122,10 @@ public class OrderPlacementControllerB2C {
 	public static String promoCodeAppliedValue;
 	public static String promoCodeValue;
 	public static org.json.JSONObject addProdReqPayload = null;
+	public static String paymentTypeMode = null;
+	public static String userTypeSelected = null;
+	public static String initialOrderSelected = null;
+	public static String finalOrderSelected = null;
 
 	private OrderServiceB2C orderservice;
 	public OrderSubscriptionRespository ordersubRespository;
@@ -96,6 +155,7 @@ public class OrderPlacementControllerB2C {
 	@PostMapping("/placeOrderB2CHome")
 	public String placeOrderPageAction(@RequestParam("store") String store,
 			@RequestParam(value = "env", required = false) String env,
+			@RequestParam(value = "userType", required = false) userTypeb2c userType,
 			@RequestParam(value = "userid", required = false) String userId,
 			@RequestParam(value = "deliveryMode", required = false) String deliveryMode,
 			@RequestParam(value = "isbnType", required = false) IsbnType isbnType,
@@ -121,7 +181,20 @@ public class OrderPlacementControllerB2C {
 		orderobj.setEnv(env);
 		environmentSelected = env;
 
+		orderobj.setUserType(userType);
+		
+		if(userType.equals(userTypeb2c.existing))
+		{
+		userTypeSelected =userTypeb2c.existing.toString(); 
+		System.out.println("userTypeSelected :"+userTypeSelected);
 		orderobj.setUserid(userId);
+		}
+		else	
+		{
+		userTypeSelected =userTypeb2c.create.toString();
+		System.out.println("userTypeSelected :"+userTypeSelected);
+		}
+	
 		orderobj.setDeliveryMode(deliveryMode);
 		deliveryModeSelected = deliveryMode;
 
@@ -276,12 +349,14 @@ public class OrderPlacementControllerB2C {
 
 		if (initialOrder.equalsIgnoreCase("yes")) {
 			sub.setRentalIsbn(rentalIsbn);
+			initialOrderSelected = "yes";
 		}
 
 		sub.setFinalOrder(finalOrder);
 
 		if (finalOrder.equalsIgnoreCase("yes")) {
 			sub.setRentalType(rentalType);
+			finalOrderSelected = "yes";
 		}
 
 		orderservice.setBaseStore(store);
@@ -334,6 +409,9 @@ public class OrderPlacementControllerB2C {
 		OrderWorkflowB2C.OrderID = null;
 		OrderWorkflowB2C.subscriptionId = null;
 		placeOrderOutline.rentalID = null;
+		OrderPlacementControllerB2C.finalOrderSelected=null;
+		OrderPlacementControllerB2C.initialOrderSelected=null;
+
 		
 
 
@@ -375,6 +453,11 @@ public class OrderPlacementControllerB2C {
 	public void executeOrderWorkflow(String store, String userId, PaymentType paymentType,
 			CreditCardTypeB2C creditCardType) {
 		try {
+			if(userTypeSelected.equals(userTypeb2c.create.toString()))
+			{
+				placeOrderOutline.createB2CUserUsingSAPApi(store);
+				userId = placeOrderOutline.userID;
+			}
 			placeOrderOutline.createCart(userId, baseStore, store, 201);
 			if(isbnTypeSelected.equalsIgnoreCase("combined"))
 			{
@@ -493,16 +576,21 @@ public class OrderPlacementControllerB2C {
 
 				if (paymentTypeSelected.equals(paymentType.cc)) {
 					if (creditTypeSelected.equals(creditCardType.MasterCard)) {
+						paymentTypeMode = "cc-Master";
 						placeOrderOutline.launchCyberSourceAndCompleteCCPayment("Master3", baseStore);
 					} else if (creditTypeSelected.equals(creditCardType.Visa)) {
 						placeOrderOutline.launchCyberSourceAndCompleteCCPayment("Visa", baseStore);
+						paymentTypeMode = "cc-Visa";
 					} else if (creditTypeSelected.equals(creditCardType.Discover)) {
+						paymentTypeMode = "cc-Discover";
 						placeOrderOutline.launchCyberSourceAndCompleteCCPayment("Discover", baseStore);
 					} else if (creditTypeSelected.equals(creditCardType.Amex)) {
+						paymentTypeMode = "cc-Amex";
 						placeOrderOutline.launchCyberSourceAndCompleteCCPayment("Amex3", baseStore);
 					}
 					placeOrderOutline.placeOrder("B2C", baseStore, store, 201);
 				} else if (paymentTypeSelected.equals(paymentType.paypal)) {
+					paymentTypeMode = "paypal";
 					placeOrderOutline.launchFullAuthNewPaypalURLForB2C(baseStore, 200);
 					placeOrderOutline.verifyPayPalPortalHasLaunched();
 					placeOrderOutline.completeFullAuthNewPaypalTransaction();

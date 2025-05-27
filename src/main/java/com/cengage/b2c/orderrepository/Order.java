@@ -21,6 +21,9 @@ public class Order {
 	@NotBlank(message = "Environment cannot be blank")
 	private String env;
 	
+	@Enumerated(EnumType.STRING)
+	public userTypeb2c userType;
+	
 	@NotBlank(message = "User Id cannot be blank")
 	private String userid;
 	
@@ -70,6 +73,16 @@ public class Order {
 	public void setEnv(String env) {
 		this.env = env;
 	}
+	public userTypeb2c getUserType() {
+		return userType;
+	}
+
+
+	public void setUserType(userTypeb2c userType) {
+		this.userType = userType;
+	}
+
+
 	public String getUserid() {
 		return userid;
 	}
@@ -159,10 +172,10 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", env=" + env + ", userid=" + userid + ", paymentType=" + paymentType
-				+ ", deliveryMode=" + deliveryMode + ", isbnType=" + isbnType + ", creditCardType=" + creditCardType
-				+ ", physicalISBN=" + physicalISBN + ", digitalISBN=" + digitalISBN + ", bundleISBN=" + bundleISBN
-				+ ", otherISBN=" + otherISBN + ", multipleProd=" + multipleProd + ", promoCodeApplied="
+		return "Order [id=" + id + ", env=" + env + ", userType=" + userType + ", userid=" + userid + ", paymentType="
+				+ paymentType + ", deliveryMode=" + deliveryMode + ", isbnType=" + isbnType + ", creditCardType="
+				+ creditCardType + ", physicalISBN=" + physicalISBN + ", digitalISBN=" + digitalISBN + ", bundleISBN="
+				+ bundleISBN + ", otherISBN=" + otherISBN + ", multipleProd=" + multipleProd + ", promoCodeApplied="
 				+ promoCodeApplied + ", promoCode=" + promoCode + "]";
 	}
 

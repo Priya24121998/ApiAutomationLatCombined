@@ -12,6 +12,7 @@
 	<groupId>ApiAutomationLatCombined</groupId>
 	<artifactId>ApiAutomationLatCombined</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>ApiAutomationLatCombined</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
@@ -266,19 +267,33 @@
 			<version>3.5.1</version>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>3.4.4</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>example.TestNGWithSpringApplication</mainClass>
-				</configuration>
 				<executions>
+					<!-- Execution for B2B application -->
 					<execution>
+						<id>b2b-repackage</id>
 						<goals>
 							<goal>repackage</goal>
 						</goals>
+						<configuration>
+							<mainClass>
+								com.cengage.b2b.placeOrderApplication.PlaceOrderWebApplication</mainClass>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -334,16 +349,6 @@
 					<includes>
 						<include>**/*.js</include>
 					</includes>
-					<suiteXmlFiles>
-						<suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
-					</suiteXmlFiles>
-					<properties>
-						<property>
-							<name>provider</name>
-							<value>
-								org.apache.maven.surefire.testng.TestNGProvider</value>
-						</property>
-					</properties>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -380,126 +385,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<profiles>
-		<profile>
-			<id>parallel</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.github.temyers</groupId>
-						<artifactId>cucumber-jvm-parallel-plugin</artifactId>
-						<version>5.0.0</version>
-						<executions>
-							<execution>
-								<id>generateRunners</id>
-								<phase>generate-test-sources</phase>
-								<goals>
-									<goal>generateRunners</goal>
-								</goals>
-								<configuration>
-									<!-- Mandatory -->
-									<!-- List of package names to scan for glue
-									code. -->
-									<glue>
-										<package>com.cengage.stepdefs</package>
-									</glue>
-									<!-- These are optional, with the default
-									values -->
-									<!-- Where to output the generated tests -->
-									<outputDirectory>
-										${project.build.directory}/generated-test-sources/cucumber</outputDirectory>
-									<!-- The directory, which must be in the
-									root of the runtime classpath,
-										containing your feature files. -->
-									<featuresDirectory>
-										src/test/resources/FeatureFiles/</featuresDirectory>
-									<!-- Directory where the cucumber report
-									files shall be written -->
-									<cucumberOutputDir>target/cucumber/</cucumberOutputDir>
-									<!-- List of cucumber plugins. When none are
-									provided the json formatter
-										is used. For more advanced usage see section about configuring cucumber plugins -->
-									<plugins>
-										<plugin>
-											<name>json</name>
-										</plugin>
-										<plugin>
-											<name>rerun</name>
-											<outputDirectory>
-												${project.build.directory}/rerun</outputDirectory>
-										</plugin>
-									</plugins>
-
-									<strict>true</strict>
-									<monochrome>true</monochrome>
-									<!-- The tags to run, maps to
-									CucumberOptions.tags property. Default
-										is no tags. -->
-									<tags>
-										<tag>${tags}</tag>
-									</tags>
-									<!-- Generate TestNG runners instead of
-									JUnit ones. -->
-									<useTestNG>True</useTestNG>
-									<!-- The naming scheme to use for the
-									generated test classes. One
-										of ['simple', 'feature-title', 'pattern'] -->
-									<namingScheme>simple</namingScheme>
-									<!-- The class naming pattern to use. Only
-									required/used if naming
-										scheme is 'pattern'. -->
-									<namingPattern>Parallel{c}IT</namingPattern>
-									<!-- One of [SCENARIO, FEATURE]. SCENARIO
-									generates one runner per
-										scenario. FEATURE generates a runner per feature. -->
-									<parallelScheme>FEATURE</parallelScheme>
-									<!-- Specify a custom template for the
-									generated sources (this is
-										a path relative to the project base directory) -->
-									<customVmTemplate>Template.vm</customVmTemplate>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.17</version>
-						<configuration>
-							<excludes>
-								<exclude>**/TestRunner.java</exclude>
-							</excludes>
-						</configuration>
-						<executions>
-							<execution>
-								<id>acceptance-test</id>
-								<phase>test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<forkCount>${forkCount}</forkCount>
-									<reuseForks>true</reuseForks>
-									<excludes>
-										<exclude>**/TestRunner.class</exclude>
-									</excludes>
-									<includes>
-										<include>**/Parallel*IT.class</include>
-									</includes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>io.qameta.allure</groupId>
-						<artifactId>allure-maven</artifactId>
-						<version>${allure.maven.version}</version>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>

@@ -1,3 +1,17 @@
+/**
+ * This class contains REST actions related to placing an order outline.
+ * It provides the necessary methods to handle the business logic for
+ * creating and managing order outlines in the system.
+ *
+ * <p>Usage:</p>
+ * This class is intended to be used as part of the API layer to handle
+ * HTTP requests and responses for order outline operations.
+ *
+ * <p>Note:</p>
+ * Ensure that all required dependencies and configurations are properly
+ * set up before using this class.
+ *
+ */
 package com.cengage.restActions;
 
 import java.io.IOException;
@@ -390,7 +404,7 @@ public class placeOrderOutline extends OrderWorkFlow {
 		PropFileHandler.writeProperty(store + "_UserGuid", userGUID);
 
 		logMessage("User created Successfully: " + userID);
-		logMessage("User guid created Successfully: " + userID);
+		logMessage("User guid created Successfully: " + userGUID);
 	}
 
 	public static void checkRentalPlanID(String expectedID) {

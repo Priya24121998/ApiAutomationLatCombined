@@ -1,3 +1,20 @@
+/**
+ * This class is part of the REST actions package and is responsible for handling
+ * the user creation workflow in the application. It provides methods and logic
+ * to manage the process of creating users, ensuring proper integration with
+ * the application's backend services.
+ *
+ * <p>Usage of this class typically involves invoking its methods to perform
+ * user creation tasks as part of an end-to-end workflow. It is designed to
+ * work seamlessly within the Spring Boot API project structure.</p>
+ *
+ * <p>Make sure to configure any necessary dependencies and properties before
+ * using this class to ensure proper functionality.</p>
+ *
+ * @author Your Name
+ * @version 1.0
+ * @since 2023
+ */
 package com.cengage.restActions;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="common/navigation.jspf"%>
+<%@ include file="common/navigationb2b.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +40,8 @@ body {
     margin: 10px 0;
 }
 
-;
+.download-button {
+    margin-top: 20px;
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -62,8 +63,8 @@ body {
 }
 
 .alert-success {
-    color: green; 
-    background-color: transparent; 
+    color: green;
+    background-color: transparent;
     border-color: transparent;
 }
 .alert-danger {
@@ -83,21 +84,24 @@ a:hover {
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-function downloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+document.addEventListener("DOMContentLoaded", function () {
+    window.downloadPDF = function () {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
 
-    doc.text("Order Confirmation", 10, 10);
-    doc.text("Environment: " + document.getElementById("environment").innerText, 10, 20);
-    doc.text("Store: " + document.getElementById("store").innerText, 10, 30);
-    doc.text("Order ID: " + document.getElementById("orderId").innerText, 10, 40);
-    doc.text("User ID: " + document.getElementById("userId").innerText, 10, 50);
-    doc.text("Delivery Mode: " + document.getElementById("deliveryMode").innerText, 10, 60);
-    doc.text("Payment Type: " + document.getElementById("paymentType").innerText, 10, 70);
-    doc.text("Date: " + document.getElementById("date").innerText, 10, 80);
+        doc.text("Order Confirmation", 10, 10);
+        doc.text("Environment: " + document.getElementById("environment").innerText, 10, 20);
+        doc.text("Store: " + document.getElementById("store").innerText, 10, 30);
+        doc.text("Order ID: " + document.getElementById("orderId").innerText, 10, 40);
+        doc.text("User ID: " + document.getElementById("userId").innerText, 10, 50);
+        doc.text("Account: " + document.getElementById("account").innerText, 10, 60);
+        doc.text("Delivery Mode: " + document.getElementById("deliveryMode").innerText, 10, 70);
+        doc.text("Payment Type: " + document.getElementById("paymentType").innerText, 10, 80);
+        doc.text("Date: " + document.getElementById("date").innerText, 10, 90);
 
-    doc.save("order_confirmation.pdf");
-}
+        doc.save("order_confirmation.pdf");
+    };
+});
 </script>
 </head>
 <body>
@@ -108,15 +112,16 @@ function downloadPDF() {
                 <div class="alert alert-success" role="alert">${successMessage}</div>
                 <p style="color: green;">Thank you for placing your order. Here are your order details:</p>
                 <div class="details">
-                    <p><strong>Environment:</strong> <span id="environment">${orderMessageb2cAtt.env}</span></p>
-                    <p><strong>Store:</strong> <span id="store">${orderMessageb2cAtt.store}</span></p>
-                    <p><strong>Order ID:</strong> <span id="orderId">${orderMessageb2cAtt.orderId}</span></p>
-                    <p><strong>User ID:</strong> <span id="userId">${orderMessageb2cAtt.userId}</span></p>
-                    <p><strong>Delivery Mode:</strong> <span id="deliveryMode">${orderMessageb2cAtt.deliveryMode}</span></p>
-                    <p><strong>Payment Type:</strong> <span id="paymentType">${orderMessageb2cAtt.paymentType}</span></p>
-                    <p><strong>Date:</strong> <span id="date">${orderMessageb2cAtt.date}</span></p>
+                    <p><strong>Environment:</strong> <span id="environment">${orderMessageAtt.env}</span></p>
+                    <p><strong>Store:</strong> <span id="store">${orderMessageAtt.store}</span></p>
+                    <p><strong>Order ID:</strong> <span id="orderId">${orderMessageAtt.orderId}</span></p>
+                    <p><strong>User ID:</strong> <span id="userId">${orderMessageAtt.userId}</span></p>
+                    <p><strong>Account:</strong> <span id="account">${orderMessageAtt.account}</span></p>
+                    <p><strong>Delivery Mode:</strong> <span id="deliveryMode">${orderMessageAtt.deliveryMode}</span></p>
+                    <p><strong>Promo Code Applied:</strong> <span id="promoCode">${orderMessageAtt.promoCode}</span></p>
+                    <p><strong>Payment Type:</strong> <span id="paymentType">${orderMessageAtt.paymentType}</span></p>
+                    <p><strong>Date:</strong> <span id="date">${orderMessageAtt.date}</span></p>
                 </div>
-                <button class="download-button" onclick="downloadPDF()">Download Report</button>
             </c:when>
             <c:otherwise>
                 <h1>Order Placement Failed</h1>

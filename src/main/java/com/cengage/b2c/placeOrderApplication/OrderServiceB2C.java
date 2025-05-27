@@ -1,3 +1,38 @@
+/**
+ * Service class for handling order-related operations in the B2C application.
+ * This class provides methods to manage orders, including creating orders,
+ * setting store configurations, retrieving ISBNs, and generating order outputs.
+ * 
+ * <p>It interacts with the {@link OrderRepository} and other components to
+ * facilitate order placement and management for different stores and payment types.
+ * 
+ * <p>Supported stores include:
+ * <ul>
+ *   <li>B2CCA (Canada)</li>
+ *   <li>B2CAU (Australia)</li>
+ *   <li>B2CNZ (New Zealand)</li>
+ *   <li>B2CEMEA (Europe, Middle East, and Africa)</li>
+ *   <li>B2CUS (United States)</li>
+ * </ul>
+ * 
+ * <p>Key functionalities:
+ * <ul>
+ *   <li>Retrieve input data for a specific store</li>
+ *   <li>Set base store and payment configurations</li>
+ *   <li>Generate physical, digital, and bundle ISBNs</li>
+ *   <li>Create order output and subscription output data</li>
+ * </ul>
+ * 
+ * <p>This class is annotated with {@code @Service} to indicate that it is a Spring
+ * service component and is eligible for dependency injection.
+ * 
+ * @see OrderRepository
+ * @see Order
+ * @see OrderOut
+ * @see OrderSuscriptionOut
+ * @see PaymentType
+ * @see CreditCardTypeB2C
+ */
 package com.cengage.b2c.placeOrderApplication;
 
 import java.util.ArrayList;
@@ -96,7 +131,8 @@ public class OrderServiceB2C {
 		order.setStore(OrderPlacementControllerB2C.baseStore);
 		order.setEnv(OrderPlacementControllerB2C.environmentSelected);
 		order.setOrderId(placeOrderOutline.OrderID);
-		order.setUserId(userId != null ? userId : placeOrderOutline.userID);
+		//order.setUserId(userId != null ? userId : placeOrderOutline.userID);
+		order.setUserId(placeOrderOutline.userID);
 		order.setPromoCodeApplied(OrderPlacementControllerB2C.promoCodeAppliedValue);
 		order.setPromoCode(OrderPlacementControllerB2C.promoCodeValue);
 		order.setPaymentType(OrderPlacementControllerB2C.paymentTypeSelected.toString());
@@ -178,7 +214,10 @@ public class OrderServiceB2C {
 		order.setOrderId(placeOrderOutline.OrderID);
 		order.setUserId(userId != null ? userId : placeOrderOutline.userID);
 		order.setSubscriptionId(OrderWorkflowB2C.subscriptionId);
+		if(OrderPlacementControllerB2C.finalOrderSelected=="yes") 
+		{
 		order.setRentalType(rentalType);
+		}
 		order.setRentalIsbn(rentalIsbn);
 		order.setRentalId(placeOrderOutline.rentalID);
 		order.setPaymentType(OrderPlacementControllerB2C.paymentTypeSelected.toString());

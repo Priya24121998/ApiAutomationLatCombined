@@ -1,0 +1,2333 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string"
+      },
+      "appliedCoupons": {
+        "type": "array",
+        "items": {}
+      },
+      "appliedOrderPromotions": {
+        "type": "array",
+        "items": {}
+      },
+      "appliedProductPromotions": {
+        "type": "array",
+        "items": {}
+      },
+      "calculated": {
+        "type": "boolean"
+      },
+      "code": {
+        "type": "string"
+      },
+      "containerHeader": {
+        "type": "string"
+      },
+      "deliveryAddress": {
+        "type": "object",
+        "properties": {
+          "billingAddress": {
+            "type": "boolean"
+          },
+          "country": {
+            "type": "object",
+            "properties": {
+              "isocode": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "isocode",
+              "name"
+            ]
+          },
+          "defaultAddress": {
+            "type": "boolean"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "formattedAddress": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "line1": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "region": {
+            "type": "object",
+            "properties": {
+              "isocode": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "isocode"
+            ]
+          },
+          "shippingAddress": {
+            "type": "boolean"
+          },
+          "town": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "billingAddress",
+          "country",
+          "defaultAddress",
+          "firstName",
+          "formattedAddress",
+          "id",
+          "lastName",
+          "line1",
+          "postalCode",
+          "region",
+          "shippingAddress",
+          "town"
+        ]
+      },
+      "deliveryItemsQuantity": {
+        "type": "integer"
+      },
+      "deliveryOrderGroups": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "accessLength": {
+                        "type": "string"
+                      },
+                      "backOrderedQty": {
+                        "type": "integer"
+                      },
+                      "configurationInfos": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "containerItem": {
+                        "type": "string"
+                      },
+                      "digital": {
+                        "type": "boolean"
+                      },
+                      "discount": {
+                        "type": "object",
+                        "properties": {
+                          "currencyIso": {
+                            "type": "string"
+                          },
+                          "formattedValue": {
+                            "type": "string"
+                          },
+                          "priceType": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "currencyIso",
+                          "formattedValue",
+                          "priceType",
+                          "value"
+                        ]
+                      },
+                      "entryNumber": {
+                        "type": "integer"
+                      },
+                      "entryStatus": {
+                        "type": "string"
+                      },
+                      "payerModel": {
+                        "type": "string"
+                      },
+                      "paymentFrequency": {
+                        "type": "string"
+                      },
+                      "product": {
+                        "type": "object",
+                        "properties": {
+                          "availableForPickup": {
+                            "type": "boolean"
+                          },
+                          "clCartonCount": {
+                            "type": "string"
+                          },
+                          "clCustom": {
+                            "type": "boolean"
+                          },
+                          "clSearchable": {
+                            "type": "boolean"
+                          },
+                          "clTotalPageCount": {
+                            "type": "integer"
+                          },
+                          "code": {
+                            "type": "string"
+                          },
+                          "freeEbookOption": {
+                            "type": "boolean"
+                          },
+                          "purchasable": {
+                            "type": "boolean"
+                          },
+                          "stock": {
+                            "type": "object",
+                            "properties": {
+                              "isValueRounded": {
+                                "type": "boolean"
+                              },
+                              "stockLevel": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "isValueRounded",
+                              "stockLevel"
+                            ]
+                          },
+                          "url": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "availableForPickup",
+                          "clCartonCount",
+                          "clCustom",
+                          "clSearchable",
+                          "clTotalPageCount",
+                          "code",
+                          "freeEbookOption",
+                          "purchasable",
+                          "stock",
+                          "url"
+                        ]
+                      },
+                      "provisionActionRequest": {
+                        "type": "string"
+                      },
+                      "quantity": {
+                        "type": "integer"
+                      },
+                      "registrationKey": {
+                        "type": "string"
+                      },
+                      "rentalBuyOut": {
+                        "type": "boolean"
+                      },
+                      "shipCarrier": {
+                        "type": "string"
+                      },
+                      "shippingUpcharge": {
+                        "type": "number"
+                      },
+                      "taxToBePaidUpfront": {
+                        "type": "boolean"
+                      },
+                      "taxValue": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "appliedValue": {
+                                "type": "number"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "currencyIsoCode": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "appliedValue",
+                              "code",
+                              "currencyIsoCode",
+                              "value"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "appliedValue": {
+                                "type": "number"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "currencyIsoCode": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "appliedValue",
+                              "code",
+                              "currencyIsoCode",
+                              "value"
+                            ]
+                          }
+                        ]
+                      },
+                      "taxablePortion": {
+                        "type": "object",
+                        "properties": {
+                          "currencyIso": {
+                            "type": "string"
+                          },
+                          "formattedValue": {
+                            "type": "string"
+                          },
+                          "priceType": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "currencyIso",
+                          "formattedValue",
+                          "priceType",
+                          "value"
+                        ]
+                      },
+                      "totalPrice": {
+                        "type": "object",
+                        "properties": {
+                          "currencyIso": {
+                            "type": "string"
+                          },
+                          "formattedValue": {
+                            "type": "string"
+                          },
+                          "priceType": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "currencyIso",
+                          "formattedValue",
+                          "priceType",
+                          "value"
+                        ]
+                      },
+                      "trackingId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "accessLength",
+                      "backOrderedQty",
+                      "configurationInfos",
+                      "containerItem",
+                      "digital",
+                      "discount",
+                      "entryNumber",
+                      "entryStatus",
+                      "payerModel",
+                      "paymentFrequency",
+                      "product",
+                      "provisionActionRequest",
+                      "quantity",
+                      "registrationKey",
+                      "rentalBuyOut",
+                      "shipCarrier",
+                      "shippingUpcharge",
+                      "taxToBePaidUpfront",
+                      "taxValue",
+                      "taxablePortion",
+                      "totalPrice",
+                      "trackingId"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "accessLength": {
+                        "type": "string"
+                      },
+                      "backOrderedQty": {
+                        "type": "integer"
+                      },
+                      "configurationInfos": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "containerItem": {
+                        "type": "string"
+                      },
+                      "digital": {
+                        "type": "boolean"
+                      },
+                      "discount": {
+                        "type": "object",
+                        "properties": {
+                          "currencyIso": {
+                            "type": "string"
+                          },
+                          "formattedValue": {
+                            "type": "string"
+                          },
+                          "priceType": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "currencyIso",
+                          "formattedValue",
+                          "priceType",
+                          "value"
+                        ]
+                      },
+                      "entryNumber": {
+                        "type": "integer"
+                      },
+                      "entryStatus": {
+                        "type": "string"
+                      },
+                      "payerModel": {
+                        "type": "string"
+                      },
+                      "paymentFrequency": {
+                        "type": "string"
+                      },
+                      "product": {
+                        "type": "object",
+                        "properties": {
+                          "availableForPickup": {
+                            "type": "boolean"
+                          },
+                          "clCartonCount": {
+                            "type": "string"
+                          },
+                          "clCustom": {
+                            "type": "boolean"
+                          },
+                          "clSearchable": {
+                            "type": "boolean"
+                          },
+                          "clTotalPageCount": {
+                            "type": "integer"
+                          },
+                          "code": {
+                            "type": "string"
+                          },
+                          "freeEbookOption": {
+                            "type": "boolean"
+                          },
+                          "purchasable": {
+                            "type": "boolean"
+                          },
+                          "stock": {
+                            "type": "object",
+                            "properties": {
+                              "isValueRounded": {
+                                "type": "boolean"
+                              },
+                              "stockLevel": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "isValueRounded",
+                              "stockLevel"
+                            ]
+                          },
+                          "url": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "availableForPickup",
+                          "clCartonCount",
+                          "clCustom",
+                          "clSearchable",
+                          "clTotalPageCount",
+                          "code",
+                          "freeEbookOption",
+                          "purchasable",
+                          "stock",
+                          "url"
+                        ]
+                      },
+                      "provisionActionRequest": {
+                        "type": "string"
+                      },
+                      "quantity": {
+                        "type": "integer"
+                      },
+                      "registrationKey": {
+                        "type": "string"
+                      },
+                      "rentalBuyOut": {
+                        "type": "boolean"
+                      },
+                      "shipCarrier": {
+                        "type": "string"
+                      },
+                      "shippingUpcharge": {
+                        "type": "number"
+                      },
+                      "taxToBePaidUpfront": {
+                        "type": "boolean"
+                      },
+                      "taxValue": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "appliedValue": {
+                                "type": "number"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "currencyIsoCode": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "appliedValue",
+                              "code",
+                              "currencyIsoCode",
+                              "value"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "appliedValue": {
+                                "type": "number"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "currencyIsoCode": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "appliedValue",
+                              "code",
+                              "currencyIsoCode",
+                              "value"
+                            ]
+                          }
+                        ]
+                      },
+                      "taxablePortion": {
+                        "type": "object",
+                        "properties": {
+                          "currencyIso": {
+                            "type": "string"
+                          },
+                          "formattedValue": {
+                            "type": "string"
+                          },
+                          "priceType": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "currencyIso",
+                          "formattedValue",
+                          "priceType",
+                          "value"
+                        ]
+                      },
+                      "totalPrice": {
+                        "type": "object",
+                        "properties": {
+                          "currencyIso": {
+                            "type": "string"
+                          },
+                          "formattedValue": {
+                            "type": "string"
+                          },
+                          "priceType": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "currencyIso",
+                          "formattedValue",
+                          "priceType",
+                          "value"
+                        ]
+                      },
+                      "trackingId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "accessLength",
+                      "backOrderedQty",
+                      "configurationInfos",
+                      "containerItem",
+                      "digital",
+                      "discount",
+                      "entryNumber",
+                      "entryStatus",
+                      "payerModel",
+                      "paymentFrequency",
+                      "product",
+                      "provisionActionRequest",
+                      "quantity",
+                      "registrationKey",
+                      "rentalBuyOut",
+                      "shipCarrier",
+                      "shippingUpcharge",
+                      "taxToBePaidUpfront",
+                      "taxValue",
+                      "taxablePortion",
+                      "totalPrice",
+                      "trackingId"
+                    ]
+                  }
+                ]
+              },
+              "totalPriceWithTax": {
+                "type": "object",
+                "properties": {
+                  "currencyIso": {
+                    "type": "string"
+                  },
+                  "formattedValue": {
+                    "type": "string"
+                  },
+                  "priceType": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "currencyIso",
+                  "formattedValue",
+                  "priceType",
+                  "value"
+                ]
+              }
+            },
+            "required": [
+              "entries",
+              "totalPriceWithTax"
+            ]
+          }
+        ]
+      },
+      "digitalOrder": {
+        "type": "boolean"
+      },
+      "entries": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "accessLength": {
+                "type": "string"
+              },
+              "backOrderedQty": {
+                "type": "integer"
+              },
+              "configurationInfos": {
+                "type": "array",
+                "items": {}
+              },
+              "containerItem": {
+                "type": "string"
+              },
+              "digital": {
+                "type": "boolean"
+              },
+              "discount": {
+                "type": "object",
+                "properties": {
+                  "currencyIso": {
+                    "type": "string"
+                  },
+                  "formattedValue": {
+                    "type": "string"
+                  },
+                  "priceType": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "currencyIso",
+                  "formattedValue",
+                  "priceType",
+                  "value"
+                ]
+              },
+              "entryNumber": {
+                "type": "integer"
+              },
+              "entryStatus": {
+                "type": "string"
+              },
+              "payerModel": {
+                "type": "string"
+              },
+              "paymentFrequency": {
+                "type": "string"
+              },
+              "product": {
+                "type": "object",
+                "properties": {
+                  "availableForPickup": {
+                    "type": "boolean"
+                  },
+                  "clCartonCount": {
+                    "type": "string"
+                  },
+                  "clCustom": {
+                    "type": "boolean"
+                  },
+                  "clSearchable": {
+                    "type": "boolean"
+                  },
+                  "clTotalPageCount": {
+                    "type": "integer"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "freeEbookOption": {
+                    "type": "boolean"
+                  },
+                  "purchasable": {
+                    "type": "boolean"
+                  },
+                  "stock": {
+                    "type": "object",
+                    "properties": {
+                      "isValueRounded": {
+                        "type": "boolean"
+                      },
+                      "stockLevel": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "isValueRounded",
+                      "stockLevel"
+                    ]
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "availableForPickup",
+                  "clCartonCount",
+                  "clCustom",
+                  "clSearchable",
+                  "clTotalPageCount",
+                  "code",
+                  "freeEbookOption",
+                  "purchasable",
+                  "stock",
+                  "url"
+                ]
+              },
+              "provisionActionRequest": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "registrationKey": {
+                "type": "string"
+              },
+              "rentalBuyOut": {
+                "type": "boolean"
+              },
+              "shipCarrier": {
+                "type": "string"
+              },
+              "shippingUpcharge": {
+                "type": "number"
+              },
+              "taxToBePaidUpfront": {
+                "type": "boolean"
+              },
+              "taxValue": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "appliedValue": {
+                        "type": "number"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "currencyIsoCode": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "appliedValue",
+                      "code",
+                      "currencyIsoCode",
+                      "value"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "appliedValue": {
+                        "type": "number"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "currencyIsoCode": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "appliedValue",
+                      "code",
+                      "currencyIsoCode",
+                      "value"
+                    ]
+                  }
+                ]
+              },
+              "taxablePortion": {
+                "type": "object",
+                "properties": {
+                  "currencyIso": {
+                    "type": "string"
+                  },
+                  "formattedValue": {
+                    "type": "string"
+                  },
+                  "priceType": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "currencyIso",
+                  "formattedValue",
+                  "priceType",
+                  "value"
+                ]
+              },
+              "totalPrice": {
+                "type": "object",
+                "properties": {
+                  "currencyIso": {
+                    "type": "string"
+                  },
+                  "formattedValue": {
+                    "type": "string"
+                  },
+                  "priceType": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "currencyIso",
+                  "formattedValue",
+                  "priceType",
+                  "value"
+                ]
+              },
+              "trackingId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "accessLength",
+              "backOrderedQty",
+              "configurationInfos",
+              "containerItem",
+              "digital",
+              "discount",
+              "entryNumber",
+              "entryStatus",
+              "payerModel",
+              "paymentFrequency",
+              "product",
+              "provisionActionRequest",
+              "quantity",
+              "registrationKey",
+              "rentalBuyOut",
+              "shipCarrier",
+              "shippingUpcharge",
+              "taxToBePaidUpfront",
+              "taxValue",
+              "taxablePortion",
+              "totalPrice",
+              "trackingId"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "accessLength": {
+                "type": "string"
+              },
+              "backOrderedQty": {
+                "type": "integer"
+              },
+              "configurationInfos": {
+                "type": "array",
+                "items": {}
+              },
+              "containerItem": {
+                "type": "string"
+              },
+              "digital": {
+                "type": "boolean"
+              },
+              "discount": {
+                "type": "object",
+                "properties": {
+                  "currencyIso": {
+                    "type": "string"
+                  },
+                  "formattedValue": {
+                    "type": "string"
+                  },
+                  "priceType": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "currencyIso",
+                  "formattedValue",
+                  "priceType",
+                  "value"
+                ]
+              },
+              "entryNumber": {
+                "type": "integer"
+              },
+              "entryStatus": {
+                "type": "string"
+              },
+              "payerModel": {
+                "type": "string"
+              },
+              "paymentFrequency": {
+                "type": "string"
+              },
+              "product": {
+                "type": "object",
+                "properties": {
+                  "availableForPickup": {
+                    "type": "boolean"
+                  },
+                  "clCartonCount": {
+                    "type": "string"
+                  },
+                  "clCustom": {
+                    "type": "boolean"
+                  },
+                  "clSearchable": {
+                    "type": "boolean"
+                  },
+                  "clTotalPageCount": {
+                    "type": "integer"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "freeEbookOption": {
+                    "type": "boolean"
+                  },
+                  "purchasable": {
+                    "type": "boolean"
+                  },
+                  "stock": {
+                    "type": "object",
+                    "properties": {
+                      "isValueRounded": {
+                        "type": "boolean"
+                      },
+                      "stockLevel": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "isValueRounded",
+                      "stockLevel"
+                    ]
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "availableForPickup",
+                  "clCartonCount",
+                  "clCustom",
+                  "clSearchable",
+                  "clTotalPageCount",
+                  "code",
+                  "freeEbookOption",
+                  "purchasable",
+                  "stock",
+                  "url"
+                ]
+              },
+              "provisionActionRequest": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "registrationKey": {
+                "type": "string"
+              },
+              "rentalBuyOut": {
+                "type": "boolean"
+              },
+              "shipCarrier": {
+                "type": "string"
+              },
+              "shippingUpcharge": {
+                "type": "number"
+              },
+              "taxToBePaidUpfront": {
+                "type": "boolean"
+              },
+              "taxValue": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "appliedValue": {
+                        "type": "number"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "currencyIsoCode": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "appliedValue",
+                      "code",
+                      "currencyIsoCode",
+                      "value"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "appliedValue": {
+                        "type": "number"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "currencyIsoCode": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "appliedValue",
+                      "code",
+                      "currencyIsoCode",
+                      "value"
+                    ]
+                  }
+                ]
+              },
+              "taxablePortion": {
+                "type": "object",
+                "properties": {
+                  "currencyIso": {
+                    "type": "string"
+                  },
+                  "formattedValue": {
+                    "type": "string"
+                  },
+                  "priceType": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "currencyIso",
+                  "formattedValue",
+                  "priceType",
+                  "value"
+                ]
+              },
+              "totalPrice": {
+                "type": "object",
+                "properties": {
+                  "currencyIso": {
+                    "type": "string"
+                  },
+                  "formattedValue": {
+                    "type": "string"
+                  },
+                  "priceType": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "currencyIso",
+                  "formattedValue",
+                  "priceType",
+                  "value"
+                ]
+              },
+              "trackingId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "accessLength",
+              "backOrderedQty",
+              "configurationInfos",
+              "containerItem",
+              "digital",
+              "discount",
+              "entryNumber",
+              "entryStatus",
+              "payerModel",
+              "paymentFrequency",
+              "product",
+              "provisionActionRequest",
+              "quantity",
+              "registrationKey",
+              "rentalBuyOut",
+              "shipCarrier",
+              "shippingUpcharge",
+              "taxToBePaidUpfront",
+              "taxValue",
+              "taxablePortion",
+              "totalPrice",
+              "trackingId"
+            ]
+          }
+        ]
+      },
+      "guid": {
+        "type": "string"
+      },
+      "net": {
+        "type": "boolean"
+      },
+      "orderDiscounts": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "orderType": {
+        "type": "string"
+      },
+      "paymentInfo": {
+        "type": "object",
+        "properties": {
+          "accountHolderName": {
+            "type": "string"
+          },
+          "billingAddress": {
+            "type": "object",
+            "properties": {
+              "billingAddress": {
+                "type": "boolean"
+              },
+              "country": {
+                "type": "object",
+                "properties": {
+                  "isocode": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "isocode",
+                  "name"
+                ]
+              },
+              "defaultAddress": {
+                "type": "boolean"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "formattedAddress": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "line1": {
+                "type": "string"
+              },
+              "line2": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "region": {
+                "type": "object",
+                "properties": {
+                  "isocode": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "isocode"
+                ]
+              },
+              "shippingAddress": {
+                "type": "boolean"
+              },
+              "town": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "billingAddress",
+              "country",
+              "defaultAddress",
+              "firstName",
+              "formattedAddress",
+              "id",
+              "lastName",
+              "line1",
+              "line2",
+              "phone",
+              "postalCode",
+              "region",
+              "shippingAddress",
+              "town"
+            ]
+          },
+          "cardNumber": {
+            "type": "string"
+          },
+          "cardType": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "name"
+            ]
+          },
+          "defaultPayment": {
+            "type": "boolean"
+          },
+          "expiryMonth": {
+            "type": "string"
+          },
+          "expiryYear": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "saved": {
+            "type": "boolean"
+          },
+          "subscriptionId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accountHolderName",
+          "billingAddress",
+          "cardNumber",
+          "cardType",
+          "defaultPayment",
+          "expiryMonth",
+          "expiryYear",
+          "id",
+          "requestId",
+          "saved",
+          "subscriptionId"
+        ]
+      },
+      "paymentMode": {
+        "type": "string"
+      },
+      "pickupItemsQuantity": {
+        "type": "integer"
+      },
+      "pickupOrderGroups": {
+        "type": "array",
+        "items": {}
+      },
+      "productDiscounts": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "site": {
+        "type": "string"
+      },
+      "store": {
+        "type": "string"
+      },
+      "student": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "uid": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "uid",
+          "firstName",
+          "lastName"
+        ]
+      },
+      "studentUpfrontPaymentPortion": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "studentUpfrontPaymentPortionWithTax": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "subTotal": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "totalDiscounts": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "totalItems": {
+        "type": "integer"
+      },
+      "totalPrice": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "totalPriceWithTax": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "totalTax": {
+        "type": "object",
+        "properties": {
+          "currencyIso": {
+            "type": "string"
+          },
+          "formattedValue": {
+            "type": "string"
+          },
+          "priceType": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "currencyIso",
+          "formattedValue",
+          "priceType",
+          "value"
+        ]
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "emailId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "uid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "emailId",
+          "name",
+          "uid"
+        ]
+      },
+      "cancellable": {
+        "type": "boolean"
+      },
+      "consignments": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "entries": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "orderEntry": {
+                        "type": "object",
+                        "properties": {
+                          "accessLength": {
+                            "type": "string"
+                          },
+                          "backOrderedQty": {
+                            "type": "integer"
+                          },
+                          "configurationInfos": {
+                            "type": "array",
+                            "items": {}
+                          },
+                          "containerItem": {
+                            "type": "string"
+                          },
+                          "digital": {
+                            "type": "boolean"
+                          },
+                          "discount": {
+                            "type": "object",
+                            "properties": {
+                              "currencyIso": {
+                                "type": "string"
+                              },
+                              "formattedValue": {
+                                "type": "string"
+                              },
+                              "priceType": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "currencyIso",
+                              "formattedValue",
+                              "priceType",
+                              "value"
+                            ]
+                          },
+                          "entryNumber": {
+                            "type": "integer"
+                          },
+                          "payerModel": {
+                            "type": "string"
+                          },
+                          "paymentFrequency": {
+                            "type": "string"
+                          },
+                          "product": {
+                            "type": "object",
+                            "properties": {
+                              "availableForPickup": {
+                                "type": "boolean"
+                              },
+                              "clCartonCount": {
+                                "type": "string"
+                              },
+                              "clCustom": {
+                                "type": "boolean"
+                              },
+                              "clSearchable": {
+                                "type": "boolean"
+                              },
+                              "clTotalPageCount": {
+                                "type": "integer"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "freeEbookOption": {
+                                "type": "boolean"
+                              },
+                              "purchasable": {
+                                "type": "boolean"
+                              },
+                              "stock": {
+                                "type": "object",
+                                "properties": {
+                                  "isValueRounded": {
+                                    "type": "boolean"
+                                  },
+                                  "stockLevel": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "isValueRounded",
+                                  "stockLevel"
+                                ]
+                              },
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "availableForPickup",
+                              "clCartonCount",
+                              "clCustom",
+                              "clSearchable",
+                              "clTotalPageCount",
+                              "code",
+                              "freeEbookOption",
+                              "purchasable",
+                              "stock",
+                              "url"
+                            ]
+                          },
+                          "provisionActionRequest": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "integer"
+                          },
+                          "registrationKey": {
+                            "type": "string"
+                          },
+                          "rentalBuyOut": {
+                            "type": "boolean"
+                          },
+                          "shipCarrier": {
+                            "type": "string"
+                          },
+                          "shippingUpcharge": {
+                            "type": "number"
+                          },
+                          "taxToBePaidUpfront": {
+                            "type": "boolean"
+                          },
+                          "taxValue": {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "appliedValue": {
+                                    "type": "number"
+                                  },
+                                  "code": {
+                                    "type": "string"
+                                  },
+                                  "currencyIsoCode": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "appliedValue",
+                                  "code",
+                                  "currencyIsoCode",
+                                  "value"
+                                ]
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "appliedValue": {
+                                    "type": "number"
+                                  },
+                                  "code": {
+                                    "type": "string"
+                                  },
+                                  "currencyIsoCode": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "appliedValue",
+                                  "code",
+                                  "currencyIsoCode",
+                                  "value"
+                                ]
+                              }
+                            ]
+                          },
+                          "taxablePortion": {
+                            "type": "object",
+                            "properties": {
+                              "currencyIso": {
+                                "type": "string"
+                              },
+                              "formattedValue": {
+                                "type": "string"
+                              },
+                              "priceType": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "currencyIso",
+                              "formattedValue",
+                              "priceType",
+                              "value"
+                            ]
+                          },
+                          "totalPrice": {
+                            "type": "object",
+                            "properties": {
+                              "currencyIso": {
+                                "type": "string"
+                              },
+                              "formattedValue": {
+                                "type": "string"
+                              },
+                              "priceType": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "currencyIso",
+                              "formattedValue",
+                              "priceType",
+                              "value"
+                            ]
+                          },
+                          "trackingId": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "accessLength",
+                          "backOrderedQty",
+                          "configurationInfos",
+                          "containerItem",
+                          "digital",
+                          "discount",
+                          "entryNumber",
+                          "payerModel",
+                          "paymentFrequency",
+                          "product",
+                          "provisionActionRequest",
+                          "quantity",
+                          "registrationKey",
+                          "rentalBuyOut",
+                          "shipCarrier",
+                          "shippingUpcharge",
+                          "taxToBePaidUpfront",
+                          "taxValue",
+                          "taxablePortion",
+                          "totalPrice",
+                          "trackingId"
+                        ]
+                      },
+                      "quantity": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "orderEntry",
+                      "quantity"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "orderEntry": {
+                        "type": "object",
+                        "properties": {
+                          "accessLength": {
+                            "type": "string"
+                          },
+                          "backOrderedQty": {
+                            "type": "integer"
+                          },
+                          "configurationInfos": {
+                            "type": "array",
+                            "items": {}
+                          },
+                          "containerItem": {
+                            "type": "string"
+                          },
+                          "digital": {
+                            "type": "boolean"
+                          },
+                          "discount": {
+                            "type": "object",
+                            "properties": {
+                              "currencyIso": {
+                                "type": "string"
+                              },
+                              "formattedValue": {
+                                "type": "string"
+                              },
+                              "priceType": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "currencyIso",
+                              "formattedValue",
+                              "priceType",
+                              "value"
+                            ]
+                          },
+                          "entryNumber": {
+                            "type": "integer"
+                          },
+                          "payerModel": {
+                            "type": "string"
+                          },
+                          "paymentFrequency": {
+                            "type": "string"
+                          },
+                          "product": {
+                            "type": "object",
+                            "properties": {
+                              "availableForPickup": {
+                                "type": "boolean"
+                              },
+                              "clCartonCount": {
+                                "type": "string"
+                              },
+                              "clCustom": {
+                                "type": "boolean"
+                              },
+                              "clSearchable": {
+                                "type": "boolean"
+                              },
+                              "clTotalPageCount": {
+                                "type": "integer"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "freeEbookOption": {
+                                "type": "boolean"
+                              },
+                              "purchasable": {
+                                "type": "boolean"
+                              },
+                              "stock": {
+                                "type": "object",
+                                "properties": {
+                                  "isValueRounded": {
+                                    "type": "boolean"
+                                  },
+                                  "stockLevel": {
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "isValueRounded",
+                                  "stockLevel"
+                                ]
+                              },
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "availableForPickup",
+                              "clCartonCount",
+                              "clCustom",
+                              "clSearchable",
+                              "clTotalPageCount",
+                              "code",
+                              "freeEbookOption",
+                              "purchasable",
+                              "stock",
+                              "url"
+                            ]
+                          },
+                          "provisionActionRequest": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "integer"
+                          },
+                          "registrationKey": {
+                            "type": "string"
+                          },
+                          "rentalBuyOut": {
+                            "type": "boolean"
+                          },
+                          "shipCarrier": {
+                            "type": "string"
+                          },
+                          "shippingUpcharge": {
+                            "type": "number"
+                          },
+                          "taxToBePaidUpfront": {
+                            "type": "boolean"
+                          },
+                          "taxValue": {
+                            "type": "array",
+                            "items": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "appliedValue": {
+                                    "type": "number"
+                                  },
+                                  "code": {
+                                    "type": "string"
+                                  },
+                                  "currencyIsoCode": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "appliedValue",
+                                  "code",
+                                  "currencyIsoCode",
+                                  "value"
+                                ]
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "appliedValue": {
+                                    "type": "number"
+                                  },
+                                  "code": {
+                                    "type": "string"
+                                  },
+                                  "currencyIsoCode": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "appliedValue",
+                                  "code",
+                                  "currencyIsoCode",
+                                  "value"
+                                ]
+                              }
+                            ]
+                          },
+                          "taxablePortion": {
+                            "type": "object",
+                            "properties": {
+                              "currencyIso": {
+                                "type": "string"
+                              },
+                              "formattedValue": {
+                                "type": "string"
+                              },
+                              "priceType": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "currencyIso",
+                              "formattedValue",
+                              "priceType",
+                              "value"
+                            ]
+                          },
+                          "totalPrice": {
+                            "type": "object",
+                            "properties": {
+                              "currencyIso": {
+                                "type": "string"
+                              },
+                              "formattedValue": {
+                                "type": "string"
+                              },
+                              "priceType": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "currencyIso",
+                              "formattedValue",
+                              "priceType",
+                              "value"
+                            ]
+                          },
+                          "trackingId": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "accessLength",
+                          "backOrderedQty",
+                          "configurationInfos",
+                          "containerItem",
+                          "digital",
+                          "discount",
+                          "entryNumber",
+                          "payerModel",
+                          "paymentFrequency",
+                          "product",
+                          "provisionActionRequest",
+                          "quantity",
+                          "registrationKey",
+                          "rentalBuyOut",
+                          "shipCarrier",
+                          "shippingUpcharge",
+                          "taxToBePaidUpfront",
+                          "taxValue",
+                          "taxablePortion",
+                          "totalPrice",
+                          "trackingId"
+                        ]
+                      },
+                      "quantity": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "orderEntry",
+                      "quantity"
+                    ]
+                  }
+                ]
+              },
+              "shippingAddress": {
+                "type": "object",
+                "properties": {
+                  "billingAddress": {
+                    "type": "boolean"
+                  },
+                  "country": {
+                    "type": "object",
+                    "properties": {
+                      "isocode": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "isocode",
+                      "name"
+                    ]
+                  },
+                  "defaultAddress": {
+                    "type": "boolean"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "formattedAddress": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "line1": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "region": {
+                    "type": "object",
+                    "properties": {
+                      "isocode": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "isocode"
+                    ]
+                  },
+                  "shippingAddress": {
+                    "type": "boolean"
+                  },
+                  "town": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "billingAddress",
+                  "country",
+                  "defaultAddress",
+                  "firstName",
+                  "formattedAddress",
+                  "id",
+                  "lastName",
+                  "line1",
+                  "postalCode",
+                  "region",
+                  "shippingAddress",
+                  "town"
+                ]
+              },
+              "status": {
+                "type": "string"
+              },
+              "statusDate": {
+                "type": "string"
+              },
+              "statusDisplay": {
+                "type": "string"
+              },
+              "trackingID": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "entries",
+              "shippingAddress",
+              "status",
+              "statusDate",
+              "statusDisplay",
+              "trackingID"
+            ]
+          }
+        ]
+      },
+      "created": {
+        "type": "string"
+      },
+      "guestCustomer": {
+        "type": "boolean"
+      },
+      "returnable": {
+        "type": "boolean"
+      },
+      "status": {
+        "type": "string"
+      },
+      "statusDisplay": {
+        "type": "string"
+      },
+      "unconsignedEntries": {
+        "type": "array",
+        "items": {}
+      }
+    },
+    "required": [
+      "type",
+      "appliedCoupons",
+      "appliedOrderPromotions",
+      "appliedProductPromotions",
+      "calculated",
+      "code",
+      "containerHeader",
+      "deliveryAddress",
+      "deliveryItemsQuantity",
+      "deliveryOrderGroups",
+      "digitalOrder",
+      "entries",
+      "guid",
+      "net",
+      "orderDiscounts",
+      "orderType",
+      "paymentInfo",
+      "paymentMode",
+      "pickupItemsQuantity",
+      "pickupOrderGroups",
+      "productDiscounts",
+      "site",
+      "store",
+      "student",
+      "studentUpfrontPaymentPortion",
+      "studentUpfrontPaymentPortionWithTax",
+      "subTotal",
+      "totalDiscounts",
+      "totalItems",
+      "totalPrice",
+      "totalPriceWithTax",
+      "totalTax",
+      "user",
+      "cancellable",
+      "consignments",
+      "created",
+      "guestCustomer",
+      "returnable",
+      "status",
+      "statusDisplay",
+      "unconsignedEntries"
+    ]
+  }

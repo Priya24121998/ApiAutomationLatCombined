@@ -1,3 +1,18 @@
+/**
+ * The BaseClass serves as a foundational class for REST actions within the application.
+ * It is part of the `com.cengage.restActions` package and provides shared functionality 
+ * or utilities that can be extended by other classes to streamline REST API interactions.
+ *
+ * <p>Usage:</p>
+ * <ul>
+ *   <li>Extend this class to inherit common REST action behaviors.</li>
+ *   <li>Override methods as needed to customize functionality for specific use cases.</li>
+ * </ul>
+ *
+ * <p>Note:</p>
+ * Ensure that any extending class adheres to the design principles of this base class 
+ * to maintain consistency and reusability across the application.
+ */
 package com.cengage.restActions;
 
 import java.time.Duration;

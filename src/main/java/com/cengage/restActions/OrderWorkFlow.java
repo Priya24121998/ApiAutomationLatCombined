@@ -1,4 +1,27 @@
 package com.cengage.restActions;
+/**
+ * The {@code OrderWorkFlow} class is responsible for managing the workflow
+ * of orders within the application. This class provides methods and logic
+ * to handle the various stages and actions involved in processing orders.
+ *
+ * <p>It is designed to be a central component for order-related operations,
+ * ensuring that the workflow is executed efficiently and consistently.
+ *
+ * <p>Usage Example:
+ * <pre>
+ * {@code
+ * OrderWorkFlow orderWorkFlow = new OrderWorkFlow();
+ * orderWorkFlow.processOrder(orderId);
+ * }
+ * </pre>
+ *
+ * <p>Note: Ensure that all dependencies required for order processing
+ * are properly configured before using this class.
+ *
+ * @author Priyadharshini M
+ * @version 1.0
+ * @since 2025
+ */
 import java.io.FilterInputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

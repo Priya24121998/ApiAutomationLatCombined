@@ -1,3 +1,20 @@
+/**
+ * The {@code OrderService} class is part of the Place Order Application module.
+ * This class is responsible for handling the business logic related to order processing.
+ * It provides methods to manage and process customer orders in the system.
+ *
+ * <p>Package: {@code com.cengage.b2b.placeOrderApplication}</p>
+ *
+ * <p>Usage:</p>
+ * <pre>
+ * {@code
+ * OrderService orderService = new OrderService();
+ * orderService.processOrder(order);
+ * }
+ * </pre>
+ *
+ * <p>Note: Ensure that all dependencies required for order processing are properly configured.</p>
+ */
 package com.cengage.b2b.placeOrderApplication;
 
 import java.util.ArrayList;

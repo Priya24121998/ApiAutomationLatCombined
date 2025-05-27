@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:olr="http://ws.thomsonlearning.com:80/olrws" xmlns:java="java:com.tl.olrws.parameters">
+    <soapenv:Header/>
+    <soapenv:Body>
+      <olr:getToken>
+        <java:password>pjen6p2s</java:password>
+        <java:uid>app_cengage_sso</java:uid>
+      </olr:getToken>
+    </soapenv:Body>
+</soapenv:Envelope>
