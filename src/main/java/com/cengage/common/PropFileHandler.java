@@ -3,6 +3,7 @@ package com.cengage.common;
 import java.io.*;
 import java.util.Properties;
 
+import com.cengage.b2b.placeOrderApplication.OrderPlacementController;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.core.io.ClassPathResource;
@@ -14,10 +15,12 @@ public class PropFileHandler {
     public static String tier;
 
     public PropFileHandler() {
-        tier = "QA"; // Default tier
+        tier = OrderPlacementController.environmentSelected;
+
         try (InputStream configReader = getClass().getClassLoader().getResourceAsStream("TestData/config.properties")) {
             if (configReader != null) {
                 config.load(configReader);
+                logMessage(tier);
             } else {
                 logMessage("config.properties not found in classpath.");
             }

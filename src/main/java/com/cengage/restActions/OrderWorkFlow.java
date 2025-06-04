@@ -55,8 +55,10 @@ public class OrderWorkFlow extends BaseClass{
 	public static String createACart(String baseSiteId, String userId, int statusCode) {
 		String endPoint = "/" + baseSiteId + "/users/" + userId + "/carts";
 		logMessage("**[INFO] Create Cart API: " + endPoint);
+
 		String token = setAuthorizationHeader();
 		RestAssured.baseURI = PropFileHandler.readProperty("base_URI");
+		System.out.println("BaseURI: "+PropFileHandler.readProperty("base_URI"));
 
 		response = RestAssured.given().headers("Authorization", token).contentType(ContentType.JSON)
 				.queryParam("fields", "DEFAULT").post(endPoint).then().assertThat().statusCode(statusCode).extract()
